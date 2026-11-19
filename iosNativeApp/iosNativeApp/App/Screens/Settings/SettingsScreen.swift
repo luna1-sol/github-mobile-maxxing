@@ -51,6 +51,9 @@ struct SettingsScreen: View {
                     Button("Source code", systemImage: "chevron.left.forwardslash.chevron.right") {
                         env.router.openExternally(AppBranding.repositoryURL)
                     }
+                    Button("Based on github-mobile-maxxing", systemImage: "arrow.triangle.branch") {
+                        env.router.openExternally(AppBranding.upstreamRepositoryURL)
+                    }
                 }
             }
             .navigationTitle("Settings")

@@ -73,8 +73,10 @@ xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp -sdk iphonesimulator 
 
 Or open `iosApp/iosApp.xcodeproj` in Xcode and run on a simulator or device.
 
-#### iOS (native SwiftUI, Liquid Glass) — work in progress
-`iosNativeApp/` is a SwiftUI front end that adopts iOS 26 **Liquid Glass** (glass tab bar with a separate search tab and scroll-to-minimize, `GlassEffectContainer` filter chips and action bars with morphing, glass/glass-prominent buttons, and a floating glass comment composer). Auth, networking, caching and models are **not** reimplemented: they come from the shared `core/model`, `core/auth` and `core/network` modules through the `MaxxingShared` framework, so fixes there apply to both iOS apps. It installs side by side with the Compose app (bundle ID `io.github.neutron42-jp.gitmax.native`).
+#### Maxxing Glass — unofficial SwiftUI iOS app (this fork only)
+> **Maxxing Glass** is an unofficial derivative of [github-mobile-maxxing](https://github.com/neutron42-jp/github-mobile-maxxing), maintained in this fork. It is not part of the upstream project, which keeps Material 3 Expressive as its design; please report issues with this app to this fork, not upstream.
+
+`iosNativeApp/` is a SwiftUI front end that adopts iOS 26 **Liquid Glass** (glass tab bar with a separate search tab and scroll-to-minimize, `GlassEffectContainer` filter chips and action bars with morphing, glass/glass-prominent buttons, and a floating glass comment composer). Auth, networking, caching and models are **not** reimplemented: they come from the shared `core/model`, `core/auth` and `core/network` modules through the `MaxxingShared` framework, so fixes there apply to both iOS apps. It installs side by side with the upstream Compose app (bundle ID `io.github.luna1-sol.maxxingglass`, URL scheme `githubmaxxing-native://`).
 
 Requires macOS, Xcode 26+ with an iOS 26 Simulator runtime, and JDK 17+ (the Xcode build runs Gradle; the Android SDK is not needed).
 
@@ -84,6 +86,7 @@ Requires macOS, Xcode 26+ with an iOS 26 Simulator runtime, and JDK 17+ (the Xco
 - **XcodeGen**: `iosNativeApp/iosNativeApp.xcodeproj` is checked in. Only run `xcodegen generate` inside `iosNativeApp/` if you edit `iosNativeApp/project.yml` or add/remove files.
 - **Building from the Xcode GUI**: if Xcode cannot find a JDK, copy `iosNativeApp/Configuration/local.env.example` to `iosNativeApp/Configuration/local.env` and set `JAVA_HOME`.
 - **Device signing (optional)**: copy `iosNativeApp/Configuration/Local.xcconfig.example` to `iosNativeApp/Configuration/Local.xcconfig` and set `TEAM_ID`.
+- **OAuth App**: sign-in uses the Client ID in `OAUTH_CLIENT_ID` (`iosNativeApp/Configuration/Config.xcconfig`, overridable in `Local.xcconfig`). The OAuth App must have Device Flow enabled.
 
 ```bash
 xcodebuild -project iosNativeApp/iosNativeApp.xcodeproj -scheme iosNativeApp -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' build

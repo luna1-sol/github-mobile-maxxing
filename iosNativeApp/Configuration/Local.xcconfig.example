@@ -1,2 +1,5 @@
 // Copy to Local.xcconfig (gitignored) for device builds.
 TEAM_ID = YOUR_TEAM_ID
+
+// Optional: sign in through your own GitHub OAuth App (Device Flow enabled).
+// OAUTH_CLIENT_ID = Ov23li...

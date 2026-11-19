@@ -311,6 +311,16 @@
         }
       }
     },
+    "Based on github-mobile-maxxing": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "github-mobile-maxxing をもとに開発"
+          }
+        }
+      }
+    },
     "Binary file": {
       "localizations": {
         "ja": {

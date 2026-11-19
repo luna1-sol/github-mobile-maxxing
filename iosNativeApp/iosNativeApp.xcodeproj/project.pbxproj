@@ -671,7 +671,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited) $(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosNativeApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "github-mobile-maxxing";
+				INFOPLIST_KEY_CFBundleDisplayName = "Maxxing Glass";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
@@ -707,7 +707,7 @@
 				FRAMEWORK_SEARCH_PATHS = "$(inherited) $(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = iosNativeApp/Info.plist;
-				INFOPLIST_KEY_CFBundleDisplayName = "github-mobile-maxxing";
+				INFOPLIST_KEY_CFBundleDisplayName = "Maxxing Glass";
 				INFOPLIST_KEY_ITSAppUsesNonExemptEncryption = NO;
 				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.developer-tools";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
