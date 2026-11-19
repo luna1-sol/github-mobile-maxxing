@@ -73,6 +73,26 @@ xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp -sdk iphonesimulator 
 
 Or open `iosApp/iosApp.xcodeproj` in Xcode and run on a simulator or device.
 
+#### iOS (native SwiftUI, Liquid Glass) — work in progress
+`iosNativeApp/` is a pure Swift/SwiftUI port of the app that adopts iOS 26 **Liquid Glass** (glass tab bar with a separate search tab and scroll-to-minimize, `GlassEffectContainer` filter chips and action bars with morphing, glass/glass-prominent buttons, and a floating glass comment composer). It does not use Gradle or the Kotlin framework, and installs side by side with the Compose app (bundle ID `io.github.neutron42-jp.gitmax.native`).
+
+Requires macOS and Xcode 26+ with an iOS 26 Simulator runtime.
+
+- **Ported so far**: Device Flow / PAT sign-in (Keychain storage, token refresh), Home (contributions, pinned & recent repos, activity feed), Inbox (filters, swipe to done / mark read), Issues & PRs (presets, timeline, comments, reactions, review, merge, draft toggle, file diffs), Repositories (detail, star/watch, branch switcher, file tree, code viewer, README, commits), user profiles, global search, and settings.
+- **Not ported yet**: Actions, Releases, Discussions, Security, Insights, Gists, labels/milestones management, file editing, background notifications.
+- **Layout**: `iosNativeApp/iosNativeApp/Core/{Model,Auth,Network,UI}` mirror `core/{model,auth,network,ui}`, and `App/` mirrors `composeApp`.
+- **XcodeGen**: `iosNativeApp/iosNativeApp.xcodeproj` is checked in. Only run `xcodegen generate` inside `iosNativeApp/` if you edit `iosNativeApp/project.yml` or add/remove files.
+- **Device signing (optional)**: copy `iosNativeApp/Configuration/Local.xcconfig.example` to `iosNativeApp/Configuration/Local.xcconfig` and set `TEAM_ID`.
+
+```bash
+xcodebuild -project iosNativeApp/iosNativeApp.xcodeproj -scheme iosNativeApp -sdk iphonesimulator -destination 'generic/platform=iOS Simulator' build
+```
+
+Unit tests (Swift Testing):
+```bash
+xcodebuild test -project iosNativeApp/iosNativeApp.xcodeproj -scheme iosNativeApp -destination 'platform=iOS Simulator,name=<SIMULATOR_NAME>'
+```
+
 #### Tests
 ```bash
 ./gradlew \

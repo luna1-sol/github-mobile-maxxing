@@ -1,0 +1,2856 @@
+{
+  "sourceLanguage": "en",
+  "strings": {
+    "#%@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "#%@"
+          }
+        }
+      }
+    },
+    "%@ #%@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ #%2$@"
+          }
+        }
+      }
+    },
+    "%@ %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@"
+          }
+        }
+      }
+    },
+    "%@ %lld": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$lld"
+          }
+        }
+      }
+    },
+    "%@ followers": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォロワー %@"
+          }
+        }
+      }
+    },
+    "%@ following": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォロー中 %@"
+          }
+        }
+      }
+    },
+    "%@ issue %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Issue %2$@ を %1$@"
+          }
+        }
+      }
+    },
+    "%@ pull request %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエスト %2$@ を %1$@"
+          }
+        }
+      }
+    },
+    "%@ release %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リリース %2$@ を %1$@"
+          }
+        }
+      }
+    },
+    "%@ repos": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリ %@"
+          }
+        }
+      }
+    },
+    "%@ — open it in the browser to download.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ — ダウンロードするにはブラウザで開いてください。"
+          }
+        }
+      }
+    },
+    "%@%@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@%2$@"
+          }
+        }
+      }
+    },
+    "%lld": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%lld"
+          }
+        }
+      }
+    },
+    "%lld contributions in the last year": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "過去1年間のコントリビューション: %lld"
+          }
+        }
+      }
+    },
+    "%lld contributions on %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@: %1$lld 件のコントリビューション"
+          }
+        }
+      }
+    },
+    "+%lld": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "+%lld"
+          }
+        }
+      }
+    },
+    "@%@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "@%@"
+          }
+        }
+      }
+    },
+    "A fast GitHub client. Sign in with your GitHub account to continue.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "高速な GitHub クライアントです。続けるには GitHub アカウントでサインインしてください。"
+          }
+        }
+      }
+    },
+    "API rate limit": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "API レート制限"
+          }
+        }
+      }
+    },
+    "About": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このアプリについて"
+          }
+        }
+      }
+    },
+    "Accent color": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクセントカラー"
+          }
+        }
+      }
+    },
+    "Account": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アカウント"
+          }
+        }
+      }
+    },
+    "Activity": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクティビティ"
+          }
+        }
+      }
+    },
+    "Add reaction": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リアクションを追加"
+          }
+        }
+      }
+    },
+    "All": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべて"
+          }
+        }
+      }
+    },
+    "Appearance": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "外観モード"
+          }
+        }
+      }
+    },
+    "Approve": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "承認"
+          }
+        }
+      }
+    },
+    "Approved": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "承認済み"
+          }
+        }
+      }
+    },
+    "Archived": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アーカイブ済み"
+          }
+        }
+      }
+    },
+    "Assigned": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アサイン"
+          }
+        }
+      }
+    },
+    "Assignees": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "担当者"
+          }
+        }
+      }
+    },
+    "Author": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "作成者"
+          }
+        }
+      }
+    },
+    "Authorization was denied in the browser.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブラウザで承認が拒否されました。"
+          }
+        }
+      }
+    },
+    "Binary file": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バイナリファイル"
+          }
+        }
+      }
+    },
+    "Binary file or diff too large to display.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バイナリファイル、または差分が大きすぎて表示できません。"
+          }
+        }
+      }
+    },
+    "Branch": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブランチ"
+          }
+        }
+      }
+    },
+    "CI activity": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "CI アクティビティ"
+          }
+        }
+      }
+    },
+    "Cancel": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "キャンセル"
+          }
+        }
+      }
+    },
+    "Changes requested": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更要求あり"
+          }
+        }
+      }
+    },
+    "Checks GitHub for unread notifications every minute while the app is in the foreground.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アプリがフォアグラウンドにある間、1分ごとに GitHub の未読通知を確認します。"
+          }
+        }
+      }
+    },
+    "Checks failed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "チェック失敗"
+          }
+        }
+      }
+    },
+    "Checks passed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "チェック成功"
+          }
+        }
+      }
+    },
+    "Checks pending": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "チェック実行中"
+          }
+        }
+      }
+    },
+    "Close": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "閉じる"
+          }
+        }
+      }
+    },
+    "Close issue": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Issue をクローズ"
+          }
+        }
+      }
+    },
+    "Close pull request": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエストをクローズ"
+          }
+        }
+      }
+    },
+    "Closed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "クローズ"
+          }
+        }
+      }
+    },
+    "Code": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コード"
+          }
+        }
+      }
+    },
+    "Code search failed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コード検索に失敗しました"
+          }
+        }
+      }
+    },
+    "Comment": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コメント"
+          }
+        }
+      }
+    },
+    "Comment actions": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コメントの操作"
+          }
+        }
+      }
+    },
+    "Commits": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コミット"
+          }
+        }
+      }
+    },
+    "Convert to draft": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下書きに変換"
+          }
+        }
+      }
+    },
+    "Copied": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピーしました"
+          }
+        }
+      }
+    },
+    "Copy": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コピー"
+          }
+        }
+      }
+    },
+    "Copy URL": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "URL をコピー"
+          }
+        }
+      }
+    },
+    "Copy code": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コードをコピー"
+          }
+        }
+      }
+    },
+    "Copy contents": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "内容をコピー"
+          }
+        }
+      }
+    },
+    "Copy link": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リンクをコピー"
+          }
+        }
+      }
+    },
+    "Copy path": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パスをコピー"
+          }
+        }
+      }
+    },
+    "Copy text": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テキストをコピー"
+          }
+        }
+      }
+    },
+    "Copy the code, then authorize in the browser.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コードをコピーして、ブラウザで承認してください。"
+          }
+        }
+      }
+    },
+    "Couldn't load": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "読み込めませんでした"
+          }
+        }
+      }
+    },
+    "Couldn't load your session": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セッションを読み込めません"
+          }
+        }
+      }
+    },
+    "Couldn't update follow state for @%@. Your token may lack the 'user:follow' scope; sign out and sign in again.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "@%@ のフォロー状態を更新できませんでした。トークンに user:follow スコープがない可能性があります。サインアウトしてから再度サインインしてください。"
+          }
+        }
+      }
+    },
+    "Create": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "作成"
+          }
+        }
+      }
+    },
+    "Create a merge commit": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マージコミットを作成"
+          }
+        }
+      }
+    },
+    "Created": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自分が作成"
+          }
+        }
+      }
+    },
+    "Dark": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ダーク"
+          }
+        }
+      }
+    },
+    "Default": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デフォルト"
+          }
+        }
+      }
+    },
+    "Delete": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "削除"
+          }
+        }
+      }
+    },
+    "Delete this comment?": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このコメントを削除しますか？"
+          }
+        }
+      }
+    },
+    "Description": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "説明"
+          }
+        }
+      }
+    },
+    "Device code timed out. Please try again.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デバイスコードの有効期限が切れました。もう一度お試しください。"
+          }
+        }
+      }
+    },
+    "Done": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了"
+          }
+        }
+      }
+    },
+    "Draft": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "下書き"
+          }
+        }
+      }
+    },
+    "Edit": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "編集"
+          }
+        }
+      }
+    },
+    "Edit comment": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コメントを編集"
+          }
+        }
+      }
+    },
+    "Empty directory": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "空のディレクトリ"
+          }
+        }
+      }
+    },
+    "Enter this code on GitHub": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub でこのコードを入力してください"
+          }
+        }
+      }
+    },
+    "Failed to contact GitHub: %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub に接続できませんでした: %@"
+          }
+        }
+      }
+    },
+    "Failed to create issue": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Issue の作成に失敗しました"
+          }
+        }
+      }
+    },
+    "Failed to fetch file": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイルを取得できませんでした"
+          }
+        }
+      }
+    },
+    "Failed to list directory": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ディレクトリを読み込めませんでした"
+          }
+        }
+      }
+    },
+    "Failed to load PR files": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "PR のファイルを読み込めませんでした"
+          }
+        }
+      }
+    },
+    "Failed to load README": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "README を読み込めませんでした"
+          }
+        }
+      }
+    },
+    "Failed to load activity feed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "アクティビティフィードの読み込みに失敗しました"
+          }
+        }
+      }
+    },
+    "Failed to load branches": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブランチを読み込めませんでした"
+          }
+        }
+      }
+    },
+    "Failed to load commit": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コミットの読み込みに失敗しました"
+          }
+        }
+      }
+    },
+    "Failed to load commits": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コミットの読み込みに失敗しました"
+          }
+        }
+      }
+    },
+    "Failed to load labels": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ラベルの読み込みに失敗しました"
+          }
+        }
+      }
+    },
+    "Failed to load notifications": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知の読み込みに失敗しました"
+          }
+        }
+      }
+    },
+    "Failed to load organizations": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "組織を読み込めませんでした"
+          }
+        }
+      }
+    },
+    "Failed to load repositories": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリの読み込みに失敗しました"
+          }
+        }
+      }
+    },
+    "Failed to load user @%@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユーザー @%@ を読み込めませんでした"
+          }
+        }
+      }
+    },
+    "Failed to load user events": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユーザーのアクティビティを読み込めませんでした"
+          }
+        }
+      }
+    },
+    "Failed to load users": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユーザーを読み込めませんでした"
+          }
+        }
+      }
+    },
+    "Failed to mark all notifications read": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべての通知を既読にできませんでした"
+          }
+        }
+      }
+    },
+    "Failed to mark thread done": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "完了にできませんでした"
+          }
+        }
+      }
+    },
+    "Failed to mark thread read": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "既読にできませんでした"
+          }
+        }
+      }
+    },
+    "Failed to post comment": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コメントの投稿に失敗しました"
+          }
+        }
+      }
+    },
+    "Failed to submit review": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レビューを送信できませんでした"
+          }
+        }
+      }
+    },
+    "Failed to unwatch repository": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリのウォッチを解除できませんでした"
+          }
+        }
+      }
+    },
+    "Failed to update follow state": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォロー状態を更新できませんでした"
+          }
+        }
+      }
+    },
+    "Failed to update star": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スター状態の更新に失敗しました"
+          }
+        }
+      }
+    },
+    "Failed to update state": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "状態の更新に失敗しました"
+          }
+        }
+      }
+    },
+    "Failed to watch repository": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリをウォッチできませんでした"
+          }
+        }
+      }
+    },
+    "Feed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フィード"
+          }
+        }
+      }
+    },
+    "Files": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更ファイル"
+          }
+        }
+      }
+    },
+    "Files %lld": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ファイル %lld"
+          }
+        }
+      }
+    },
+    "Files changed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更ファイル"
+          }
+        }
+      }
+    },
+    "Filter": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "絞り込み"
+          }
+        }
+      }
+    },
+    "Filter by state": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "状態で絞り込む"
+          }
+        }
+      }
+    },
+    "Find repositories, issues and pull requests, code, and people.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリ、Issue とプルリクエスト、コード、ユーザーを検索できます。"
+          }
+        }
+      }
+    },
+    "Follow": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォロー"
+          }
+        }
+      }
+    },
+    "Followers": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォロワー"
+          }
+        }
+      }
+    },
+    "Following": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォロー中"
+          }
+        }
+      }
+    },
+    "Forked from %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ からフォーク"
+          }
+        }
+      }
+    },
+    "General": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一般"
+          }
+        }
+      }
+    },
+    "GitHub OAuth": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub OAuth"
+          }
+        }
+      }
+    },
+    "GitHub rejected the device code request (HTTP %lld). Verify your Client ID.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub がデバイスコードの要求を拒否しました (HTTP %lld)。Client ID を確認してください。"
+          }
+        }
+      }
+    },
+    "GitHub returned HTTP %lld. Check token scopes.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub が HTTP %lld を返しました。トークンのスコープを確認してください。"
+          }
+        }
+      }
+    },
+    "GitHub returned an unexpected verification URL: %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub から想定外の認証 URL が返されました: %@"
+          }
+        }
+      }
+    },
+    "Go to repository": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリへ移動"
+          }
+        }
+      }
+    },
+    "History": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "履歴"
+          }
+        }
+      }
+    },
+    "Home": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ホーム"
+          }
+        }
+      }
+    },
+    "Image": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "画像"
+          }
+        }
+      }
+    },
+    "Inbox": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "受信箱"
+          }
+        }
+      }
+    },
+    "Inbox zero": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未読はありません"
+          }
+        }
+      }
+    },
+    "Invitation": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "招待"
+          }
+        }
+      }
+    },
+    "Issues": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Issue"
+          }
+        }
+      }
+    },
+    "Issues & PRs": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Issue と PR"
+          }
+        }
+      }
+    },
+    "Labels": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ラベル"
+          }
+        }
+      }
+    },
+    "Larger": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "大きく"
+          }
+        }
+      }
+    },
+    "Leave a comment": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コメントを入力"
+          }
+        }
+      }
+    },
+    "Leave empty to use the built-in Client ID. Your OAuth or GitHub App must have Device Flow enabled.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "空欄の場合は組み込みの Client ID を使用します。OAuth App または GitHub App で Device Flow を有効にしておく必要があります。"
+          }
+        }
+      }
+    },
+    "Less": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "少"
+          }
+        }
+      }
+    },
+    "Light": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ライト"
+          }
+        }
+      }
+    },
+    "Mark all as read": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "すべて既読にする"
+          }
+        }
+      }
+    },
+    "Mark as read": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "既読にする"
+          }
+        }
+      }
+    },
+    "Mentioned": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メンション"
+          }
+        }
+      }
+    },
+    "Merge": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マージ"
+          }
+        }
+      }
+    },
+    "Merge failed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マージに失敗しました"
+          }
+        }
+      }
+    },
+    "Merge this pull request?": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このプルリクエストをマージしますか？"
+          }
+        }
+      }
+    },
+    "Merged": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マージ済み"
+          }
+        }
+      }
+    },
+    "Merging is blocked": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "マージはブロックされています"
+          }
+        }
+      }
+    },
+    "Message": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メッセージ"
+          }
+        }
+      }
+    },
+    "Mode": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "モード"
+          }
+        }
+      }
+    },
+    "More": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "多"
+          }
+        }
+      }
+    },
+    "More actions": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "その他の操作"
+          }
+        }
+      }
+    },
+    "More sign-in options": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "その他のサインイン方法"
+          }
+        }
+      }
+    },
+    "My activity": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自分のアクティビティ"
+          }
+        }
+      }
+    },
+    "My repositories": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "自分のリポジトリ"
+          }
+        }
+      }
+    },
+    "New issue": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "新しい Issue"
+          }
+        }
+      }
+    },
+    "No changed files": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更されたファイルはありません"
+          }
+        }
+      }
+    },
+    "No changes to display.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "表示する変更はありません。"
+          }
+        }
+      }
+    },
+    "No commits": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コミットはありません"
+          }
+        }
+      }
+    },
+    "No conflicts with the base branch": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ベースブランチとのコンフリクトはありません"
+          }
+        }
+      }
+    },
+    "No description provided.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "説明はありません。"
+          }
+        }
+      }
+    },
+    "No followers": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォロワーはいません"
+          }
+        }
+      }
+    },
+    "No issues": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Issue はありません"
+          }
+        }
+      }
+    },
+    "No matching issues or pull requests": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "該当する Issue やプルリクエストはありません"
+          }
+        }
+      }
+    },
+    "No notifications": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知はありません"
+          }
+        }
+      }
+    },
+    "No public repositories": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "公開リポジトリはありません"
+          }
+        }
+      }
+    },
+    "No pull requests": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエストはありません"
+          }
+        }
+      }
+    },
+    "No recent activity": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最近のアクティビティはありません"
+          }
+        }
+      }
+    },
+    "No repositories": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリはありません"
+          }
+        }
+      }
+    },
+    "No results": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "結果はありません"
+          }
+        }
+      }
+    },
+    "Not following anyone": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "誰もフォローしていません"
+          }
+        }
+      }
+    },
+    "Nothing here": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "何もありません"
+          }
+        }
+      }
+    },
+    "Nothing to preview": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プレビューする内容はありません"
+          }
+        }
+      }
+    },
+    "Notification": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知"
+          }
+        }
+      }
+    },
+    "Notifications": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "通知"
+          }
+        }
+      }
+    },
+    "OAuth Client ID": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OAuth Client ID"
+          }
+        }
+      }
+    },
+    "OAuth Client ID is required.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OAuth Client ID が必要です。"
+          }
+        }
+      }
+    },
+    "OAuth Client ID…": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OAuth Client ID…"
+          }
+        }
+      }
+    },
+    "OK": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OK"
+          }
+        }
+      }
+    },
+    "Open": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オープン"
+          }
+        }
+      }
+    },
+    "Open GitHub": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub を開く"
+          }
+        }
+      }
+    },
+    "Open full editor": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フルエディタを開く"
+          }
+        }
+      }
+    },
+    "Open in browser": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブラウザで開く"
+          }
+        }
+      }
+    },
+    "Open repository": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリを開く"
+          }
+        }
+      }
+    },
+    "Participating": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "関与中"
+          }
+        }
+      }
+    },
+    "Personal access token": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パーソナルアクセストークン"
+          }
+        }
+      }
+    },
+    "Pin": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ピン留め"
+          }
+        }
+      }
+    },
+    "Pin to Home": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ホームにピン留め"
+          }
+        }
+      }
+    },
+    "Pinned": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ピン留め"
+          }
+        }
+      }
+    },
+    "Preview": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プレビュー"
+          }
+        }
+      }
+    },
+    "Private": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "非公開"
+          }
+        }
+      }
+    },
+    "Pull requests": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエスト"
+          }
+        }
+      }
+    },
+    "Quote reply": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "引用して返信"
+          }
+        }
+      }
+    },
+    "README": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "README"
+          }
+        }
+      }
+    },
+    "Rate limited by GitHub; polling every %llds…": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub のレート制限中です。%lld 秒ごとに確認しています…"
+          }
+        }
+      }
+    },
+    "Ready for review": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レビュー可能にする"
+          }
+        }
+      }
+    },
+    "Rebase and merge": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リベースしてマージ"
+          }
+        }
+      }
+    },
+    "Recent repositories": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "最近のリポジトリ"
+          }
+        }
+      }
+    },
+    "Recommended scopes: repo, gist, notifications, read:user, user:follow, read:org. The token is stored in the iOS Keychain.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "推奨スコープ: repo, gist, notifications, read:user, user:follow, read:org。トークンは iOS のキーチェーンに保存されます。"
+          }
+        }
+      }
+    },
+    "Refresh unread count while open": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "起動中に未読数を更新"
+          }
+        }
+      }
+    },
+    "Reopen issue": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Issue を再オープン"
+          }
+        }
+      }
+    },
+    "Reopen pull request": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエストを再オープン"
+          }
+        }
+      }
+    },
+    "Repos": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリ"
+          }
+        }
+      }
+    },
+    "Repositories": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリ"
+          }
+        }
+      }
+    },
+    "Repository %@ not found": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリ %@ が見つかりません"
+          }
+        }
+      }
+    },
+    "Request changes": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更を要求"
+          }
+        }
+      }
+    },
+    "Requesting a code…": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コードを取得中…"
+          }
+        }
+      }
+    },
+    "Retry": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "再試行"
+          }
+        }
+      }
+    },
+    "Review": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レビュー"
+          }
+        }
+      }
+    },
+    "Review requested": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レビュー依頼"
+          }
+        }
+      }
+    },
+    "Review requests": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レビュー依頼"
+          }
+        }
+      }
+    },
+    "Review required": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レビュー待ち"
+          }
+        }
+      }
+    },
+    "Reviewers": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レビュアー"
+          }
+        }
+      }
+    },
+    "Save": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "保存"
+          }
+        }
+      }
+    },
+    "Scopes": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スコープ"
+          }
+        }
+      }
+    },
+    "Search": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "検索"
+          }
+        }
+      }
+    },
+    "Search GitHub": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub を検索"
+          }
+        }
+      }
+    },
+    "Section": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セクション"
+          }
+        }
+      }
+    },
+    "Secure storage is unavailable (%@).": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セキュアストレージを利用できません (%@)。"
+          }
+        }
+      }
+    },
+    "Secure storage is unavailable: %@. If the device was just restarted, unlock it and try again.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セキュアストレージを利用できません: %@。端末を再起動した直後の場合は、ロックを解除してからもう一度お試しください。"
+          }
+        }
+      }
+    },
+    "Security alert": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "セキュリティアラート"
+          }
+        }
+      }
+    },
+    "Send comment": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コメントを送信"
+          }
+        }
+      }
+    },
+    "Settings": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "設定"
+          }
+        }
+      }
+    },
+    "Sign in": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サインイン"
+          }
+        }
+      }
+    },
+    "Sign in with GitHub": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub でサインイン"
+          }
+        }
+      }
+    },
+    "Sign in with a personal access token": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "パーソナルアクセストークンでサインイン"
+          }
+        }
+      }
+    },
+    "Sign out": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サインアウト"
+          }
+        }
+      }
+    },
+    "Sign out of GitHub?": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "GitHub からサインアウトしますか？"
+          }
+        }
+      }
+    },
+    "Signed in with": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サインイン方法"
+          }
+        }
+      }
+    },
+    "Signing in…": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "サインイン中…"
+          }
+        }
+      }
+    },
+    "Smaller": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "小さく"
+          }
+        }
+      }
+    },
+    "Something went wrong": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "エラーが発生しました"
+          }
+        }
+      }
+    },
+    "Source code": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ソースコード"
+          }
+        }
+      }
+    },
+    "Squash and merge": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スカッシュしてマージ"
+          }
+        }
+      }
+    },
+    "Star": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スター"
+          }
+        }
+      }
+    },
+    "Starred": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スター済み"
+          }
+        }
+      }
+    },
+    "State": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "状態"
+          }
+        }
+      }
+    },
+    "State changed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "状態の変更"
+          }
+        }
+      }
+    },
+    "Submit": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "送信"
+          }
+        }
+      }
+    },
+    "Submit review": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "レビューを送信"
+          }
+        }
+      }
+    },
+    "Subscribed manually": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "手動で購読"
+          }
+        }
+      }
+    },
+    "System": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "システム"
+          }
+        }
+      }
+    },
+    "Team mentioned": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "チームへのメンション"
+          }
+        }
+      }
+    },
+    "Temporary network hiccup, retrying…": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "一時的なネットワークエラーです。再試行しています…"
+          }
+        }
+      }
+    },
+    "The device code expired. Request a new code.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "デバイスコードの有効期限が切れました。新しいコードを取得してください。"
+          }
+        }
+      }
+    },
+    "The token is removed from this device. You can revoke it from GitHub settings.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この端末からトークンが削除されます。トークンの失効は GitHub の設定から行えます。"
+          }
+        }
+      }
+    },
+    "Theme": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "テーマ"
+          }
+        }
+      }
+    },
+    "This branch has conflicts that must be resolved": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "このブランチには解決が必要なコンフリクトがあります"
+          }
+        }
+      }
+    },
+    "This can't be undone.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "この操作は取り消せません。"
+          }
+        }
+      }
+    },
+    "Title": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タイトル"
+          }
+        }
+      }
+    },
+    "Token cannot be empty": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "トークンを入力してください"
+          }
+        }
+      }
+    },
+    "Try again": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "もう一度試す"
+          }
+        }
+      }
+    },
+    "Unfollow": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "フォロー解除"
+          }
+        }
+      }
+    },
+    "Unpin": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ピン留めを外す"
+          }
+        }
+      }
+    },
+    "Unpin from Home": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ホームのピン留めを外す"
+          }
+        }
+      }
+    },
+    "Unread": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "未読"
+          }
+        }
+      }
+    },
+    "User search failed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユーザー検索に失敗しました"
+          }
+        }
+      }
+    },
+    "Users": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ユーザー"
+          }
+        }
+      }
+    },
+    "Using custom Client ID %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "カスタム Client ID %@ を使用中"
+          }
+        }
+      }
+    },
+    "Version": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "バージョン"
+          }
+        }
+      }
+    },
+    "Waiting for browser authorization…": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブラウザでの承認を待っています…"
+          }
+        }
+      }
+    },
+    "Watch": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウォッチ"
+          }
+        }
+      }
+    },
+    "Watching": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ウォッチ中"
+          }
+        }
+      }
+    },
+    "Wrap lines": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "折り返し"
+          }
+        }
+      }
+    },
+    "Wrap long lines in code": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コードの長い行を折り返す"
+          }
+        }
+      }
+    },
+    "Write": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "編集"
+          }
+        }
+      }
+    },
+    "approved pull request %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエスト %@ を承認しました"
+          }
+        }
+      }
+    },
+    "approved these changes": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "が変更を承認しました"
+          }
+        }
+      }
+    },
+    "closed this": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "がクローズしました"
+          }
+        }
+      }
+    },
+    "commented on %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ にコメントしました"
+          }
+        }
+      }
+    },
+    "created %@ %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@ を作成しました"
+          }
+        }
+      }
+    },
+    "created repository": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリを作成しました"
+          }
+        }
+      }
+    },
+    "deleted %@ %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%1$@ %2$@ を削除しました"
+          }
+        }
+      }
+    },
+    "forked repository": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリをフォークしました"
+          }
+        }
+      }
+    },
+    "from %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "変更前: %@"
+          }
+        }
+      }
+    },
+    "ghp_… or github_pat_…": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ghp_… または github_pat_…"
+          }
+        }
+      }
+    },
+    "made repository public": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリを公開しました"
+          }
+        }
+      }
+    },
+    "merged into %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "が %@ にマージしました"
+          }
+        }
+      }
+    },
+    "pushed %lld commit(s) to %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%2$@ に %1$lld 件のコミットをプッシュしました"
+          }
+        }
+      }
+    },
+    "reopened this": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "が再オープンしました"
+          }
+        }
+      }
+    },
+    "requested changes": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "が変更を要求しました"
+          }
+        }
+      }
+    },
+    "requested changes on %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "%@ に変更を要求しました"
+          }
+        }
+      }
+    },
+    "review dismissed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "のレビューが却下されました"
+          }
+        }
+      }
+    },
+    "reviewed": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "がレビューしました"
+          }
+        }
+      }
+    },
+    "reviewed pull request %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエスト %@ をレビューしました"
+          }
+        }
+      }
+    },
+    "starred repository": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリにスターを付けました"
+          }
+        }
+      }
+    },
+    "−%lld": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "−%lld"
+          }
+        }
+      }
+    }
+  },
+  "version": "1.0"
+}

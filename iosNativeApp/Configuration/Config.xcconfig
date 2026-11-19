@@ -1,0 +1,16 @@
+// Shared build settings for iosNativeApp (native SwiftUI port).
+// Machine- or person-specific values (TEAM_ID etc.) go in Local.xcconfig, which is gitignored.
+
+// Deliberately different from iosApp (io.github.neutron42-jp.gitmax) so the Compose and native builds
+// can be installed side by side while the port is in progress.
+BUNDLE_ID = io.github.neutron42-jp.gitmax.native
+MARKETING_VERSION = 1.0
+CURRENT_PROJECT_VERSION = 1
+
+// Liquid Glass (glassEffect, GlassEffectContainer, glass button styles, tab bar minimize) needs iOS 26.
+IPHONEOS_DEPLOYMENT_TARGET = 26.0
+
+// Simulator builds need no signing; set TEAM_ID in Local.xcconfig for device builds.
+TEAM_ID =
+
+#include? "Local.xcconfig"
