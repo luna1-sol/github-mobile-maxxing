@@ -9,10 +9,11 @@ enum AppDeepLink: Equatable {
 }
 
 enum DeepLinkParser {
-    static let scheme = "githubmaxxing"
+    /// Differs from the Compose app's `githubmaxxing` so links open the right app when both are installed.
+    static let scheme = "githubmaxxing-native"
     static let threadHost = "thread"
 
-    /// Strict parser for `githubmaxxing://thread/{owner}/{repo}/{number}` (port of `parseStrictDeepLink`).
+    /// Strict parser for `githubmaxxing-native://thread/{owner}/{repo}/{number}` (port of `parseStrictDeepLink`).
     ///
     /// Scheme and host are case-insensitive; no user-info or port; exactly three non-empty path segments
     /// (one trailing slash tolerated); the number is ASCII digits only and positive; owner/repo are strict

@@ -49,7 +49,7 @@ final class AppRouter {
         safariURL = nil
     }
 
-    /// Handles `githubmaxxing://` and `https://github.com/...` URLs in-app. Returns false for URLs it does not own.
+    /// Handles `githubmaxxing-native://` and `https://github.com/...` URLs in-app. Returns false for URLs it does not own.
     @discardableResult
     func open(_ url: URL) -> Bool {
         guard let link = GitHubUrlParser.parse(url) else { return false }

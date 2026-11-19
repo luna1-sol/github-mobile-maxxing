@@ -5,39 +5,40 @@ import Testing
 /// Mirrors composeApp/src/commonTest/.../DeepLinkParserTest.kt and GitHubUrlParserTest.kt.
 struct DeepLinkParserTests {
     @Test(arguments: [
-        ("githubmaxxing://thread/octocat/hello-world/123", IssueRef(owner: "octocat", repo: "hello-world", number: 123)),
-        ("githubmaxxing://thread/o/r/5?x=1#f", IssueRef(owner: "o", repo: "r", number: 5)),
-        ("githubmaxxing://thread/octo/%E3%83%AA/2", IssueRef(owner: "octo", repo: "リ", number: 2)),
-        ("githubmaxxing://thread/o/r/12/", IssueRef(owner: "o", repo: "r", number: 12)),
-        ("GitHubMaxxing://THREAD/Octo/Repo/7", IssueRef(owner: "Octo", repo: "Repo", number: 7)),
-        ("githubmaxxing://thread/o/r/%34%32", IssueRef(owner: "o", repo: "r", number: 42)),
+        ("githubmaxxing-native://thread/octocat/hello-world/123", IssueRef(owner: "octocat", repo: "hello-world", number: 123)),
+        ("githubmaxxing-native://thread/o/r/5?x=1#f", IssueRef(owner: "o", repo: "r", number: 5)),
+        ("githubmaxxing-native://thread/octo/%E3%83%AA/2", IssueRef(owner: "octo", repo: "リ", number: 2)),
+        ("githubmaxxing-native://thread/o/r/12/", IssueRef(owner: "o", repo: "r", number: 12)),
+        ("GitHubMaxxing-Native://THREAD/Octo/Repo/7", IssueRef(owner: "Octo", repo: "Repo", number: 7)),
+        ("githubmaxxing-native://thread/o/r/%34%32", IssueRef(owner: "o", repo: "r", number: 42)),
     ])
     func acceptsCanonicalLinks(url: String, expected: IssueRef) {
         #expect(DeepLinkParser.parseStrict(url) == expected)
     }
 
     @Test(arguments: [
-        "githubmaxxing://thread/o/r/1/extra",
-        "githubmaxxing://thread/o/r/1/2",
-        "githubmaxxing://thread//o//r/1//",
-        "githubmaxxing://thread//r/1",
-        "githubmaxxing://thread/o//1",
-        "githubmaxxing://thread/o/r/0",
-        "githubmaxxing://thread/o/r/-1",
-        "githubmaxxing://thread/o/r/+1",
-        "githubmaxxing://thread:8080/o/r/1",
-        "githubmaxxing://user@thread/o/r/1",
-        "  githubmaxxing://thread/o/r/3  ",
-        "githubmaxxing://thread/o/r%ZZ/1",
-        "githubmaxxing://thread/o/100%/1",
-        "githubmaxxing://thread/o%2Fr/r/1",
-        "githubmaxxing://thread/o/r/%E3%81",
-        "githubmaxxing://thread/%20/r/1",
-        "", "   ", "https://thread/o/r/1", "githubmaxxing:/thread/o/r/1",
-        "githubmaxxing://other/o/r/1", "githubmaxxing:///o/r/1", "githubmaxxing://thread",
-        "githubmaxxing://thread/o/r", "githubmaxxing://thread/o/r/", "githubmaxxing://thread/o/r/abc",
-        "githubmaxxing://thread/o/r/1.5", "githubmaxxing://thread/o/r/999999999999999999",
-        "githubmaxxing://thread/o/r/1//", "not a url",
+        "githubmaxxing-native://thread/o/r/1/extra",
+        "githubmaxxing-native://thread/o/r/1/2",
+        "githubmaxxing-native://thread//o//r/1//",
+        "githubmaxxing-native://thread//r/1",
+        "githubmaxxing-native://thread/o//1",
+        "githubmaxxing-native://thread/o/r/0",
+        "githubmaxxing-native://thread/o/r/-1",
+        "githubmaxxing-native://thread/o/r/+1",
+        "githubmaxxing-native://thread:8080/o/r/1",
+        "githubmaxxing-native://user@thread/o/r/1",
+        "  githubmaxxing-native://thread/o/r/3  ",
+        "githubmaxxing-native://thread/o/r%ZZ/1",
+        "githubmaxxing-native://thread/o/100%/1",
+        "githubmaxxing-native://thread/o%2Fr/r/1",
+        "githubmaxxing-native://thread/o/r/%E3%81",
+        "githubmaxxing-native://thread/%20/r/1",
+        "", "   ", "https://thread/o/r/1", "githubmaxxing-native:/thread/o/r/1",
+        "githubmaxxing-native://other/o/r/1", "githubmaxxing-native:///o/r/1", "githubmaxxing-native://thread",
+        "githubmaxxing-native://thread/o/r", "githubmaxxing-native://thread/o/r/", "githubmaxxing-native://thread/o/r/abc",
+        "githubmaxxing-native://thread/o/r/1.5", "githubmaxxing-native://thread/o/r/999999999999999999",
+        "githubmaxxing-native://thread/o/r/1//", "not a url",
+        "githubmaxxing://thread/o/r/1",
     ])
     func rejectsLooseOrMalformedLinks(url: String) {
         #expect(DeepLinkParser.parseStrict(url) == nil)
@@ -48,7 +49,7 @@ struct DeepLinkParserTests {
     }
 
     @Test func buildsThreadURLOnlyForPositiveNumbers() {
-        #expect(DeepLinkParser.threadURL(owner: "octo", repo: "repo", number: 42) == "githubmaxxing://thread/octo/repo/42")
+        #expect(DeepLinkParser.threadURL(owner: "octo", repo: "repo", number: 42) == "githubmaxxing-native://thread/octo/repo/42")
         #expect(DeepLinkParser.threadURL(owner: "octo", repo: "repo", number: nil) == nil)
         #expect(DeepLinkParser.threadURL(owner: "octo", repo: "repo", number: 0) == nil)
         #expect(DeepLinkParser.threadURL(owner: "octo", repo: "repo", number: -3) == nil)
@@ -91,6 +92,6 @@ struct GitHubUrlParserTests {
     }
 
     @Test func notificationLinksComeFromNotifications() {
-        #expect(parse("githubmaxxing://thread/o/r/3") == .issueOrPull(IssueRef(owner: "o", repo: "r", number: 3), fromNotification: true))
+        #expect(parse("githubmaxxing-native://thread/o/r/3") == .issueOrPull(IssueRef(owner: "o", repo: "r", number: 3), fromNotification: true))
     }
 }
