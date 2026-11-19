@@ -175,6 +175,7 @@ struct NewIssueSheet: View {
                                     Spacer()
                                     if selectedLabels.contains(label.name) { Image(systemName: "checkmark").foregroundStyle(.tint) }
                                 }
+                                .contentShape(.rect)
                             }
                             .buttonStyle(.plain)
                         }

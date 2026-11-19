@@ -43,6 +43,16 @@ struct IssuePullDetailScreen: View {
         .safeAreaInset(edge: .bottom, spacing: 0) {
             if let detail = state.value { bottomBar(detail) }
         }
+        .overlay(alignment: .top) {
+            if isMutating {
+                ProgressView()
+                    .padding(12)
+                    .glassEffect(.regular, in: .circle)
+                    .padding(.top, 8)
+                    .transition(.scale.combined(with: .opacity))
+            }
+        }
+        .animation(.smooth, value: isMutating)
         .navigationTitle("#\(String(ref.number))")
         .toolbarVisibility(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
@@ -56,11 +66,6 @@ struct IssuePullDetailScreen: View {
         }
         .sheet(item: $editingComment) { comment in
             EditCommentSheet(comment: comment) { await load() }
-        }
-        .confirmationDialog("Merge this pull request?", isPresented: Binding(get: { pendingMerge != nil }, set: { if !$0 { pendingMerge = nil } }),
-                            titleVisibility: .visible, presenting: pendingMerge) { method in
-            Button(mergeTitle(method)) { Task { await merge(method) } }
-            Button("Cancel", role: .cancel) {}
         }
         .confirmationDialog("Delete this comment?", isPresented: Binding(get: { deletingComment != nil }, set: { if !$0 { deletingComment = nil } }),
                             titleVisibility: .visible, presenting: deletingComment) { comment in
@@ -141,6 +146,12 @@ struct IssuePullDetailScreen: View {
                             .tint(detail.mergeable == "CONFLICTING" ? .gray : StateColors.open)
                             .disabled(isMutating || detail.mergeable == "CONFLICTING")
                             .glassEffectID("merge", in: glassNamespace)
+                            .confirmationDialog("Merge this pull request?",
+                                                isPresented: Binding(get: { pendingMerge != nil }, set: { if !$0 { pendingMerge = nil } }),
+                                                titleVisibility: .visible, presenting: pendingMerge) { method in
+                                Button(mergeTitle(method)) { Task { await merge(method) } }
+                                Button("Cancel", role: .cancel) {}
+                            }
                         }
                     }
                     .controlSize(.regular)
@@ -499,7 +510,7 @@ private struct CommentCard<MenuContent: View>: View {
                 }
                 .buttonStyle(.plain)
                 if let association, association != "NONE" {
-                    Text(association.capitalized)
+                    Text(associationTitle(association))
                         .font(.caption2)
                         .padding(.horizontal, 6)
                         .padding(.vertical, 2)
@@ -522,6 +533,18 @@ private struct CommentCard<MenuContent: View>: View {
         }
         .padding(14)
         .contentCard(cornerRadius: 16)
+    }
+}
+
+private func associationTitle(_ association: String) -> LocalizedStringKey {
+    switch association {
+    case "OWNER": "Owner"
+    case "MEMBER": "Member"
+    case "COLLABORATOR": "Collaborator"
+    case "CONTRIBUTOR": "Contributor"
+    case "FIRST_TIME_CONTRIBUTOR": "First-time contributor"
+    case "FIRST_TIMER": "First-timer"
+    default: LocalizedStringKey(association.capitalized)
     }
 }
 

@@ -99,9 +99,13 @@ struct IssueStateIcon: View {
     var tinted = true
 
     var body: some View {
-        Image(systemName: symbol)
-            .foregroundStyle(tinted ? AnyShapeStyle(color) : AnyShapeStyle(.foreground))
-            .accessibilityLabel(Text(accessibility))
+        if tinted {
+            Image(systemName: symbol).foregroundStyle(color)
+                .accessibilityLabel(Text(accessibility))
+        } else {
+            Image(systemName: symbol)
+                .accessibilityLabel(Text(accessibility))
+        }
     }
 
     private var symbol: String {
@@ -235,7 +239,7 @@ struct IssueRow: View {
                     if !showsRepo { Text("#\(String(item.number))") }
                     Text(Formatting.relative(item.updatedAt))
                     if item.commentCount > 0 {
-                        Label("\(item.commentCount)", systemImage: "bubble.left")
+                        StatLabel(systemImage: "bubble.left", value: item.commentCount)
                     }
                     if let check = item.checkRollup {
                         CheckStatusIcon(state: check.state)

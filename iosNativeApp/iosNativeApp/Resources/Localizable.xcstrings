@@ -491,6 +491,16 @@
         }
       }
     },
+    "Collaborator": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コラボレーター"
+          }
+        }
+      }
+    },
     "Comment": {
       "localizations": {
         "ja": {
@@ -517,6 +527,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "コミット"
+          }
+        }
+      }
+    },
+    "Contributor": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "コントリビューター"
           }
         }
       }
@@ -1141,6 +1161,26 @@
         }
       }
     },
+    "First-time contributor": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "初めてのコントリビューター"
+          }
+        }
+      }
+    },
+    "First-timer": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "初めての投稿者"
+          }
+        }
+      }
+    },
     "Follow": {
       "localizations": {
         "ja": {
@@ -1397,6 +1437,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "既読にする"
+          }
+        }
+      }
+    },
+    "Member": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "メンバー"
           }
         }
       }
@@ -1817,6 +1867,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "リポジトリを開く"
+          }
+        }
+      }
+    },
+    "Owner": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "オーナー"
           }
         }
       }

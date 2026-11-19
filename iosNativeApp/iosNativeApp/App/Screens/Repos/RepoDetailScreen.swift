@@ -118,6 +118,7 @@ struct RepoDetailScreen: View {
 
     /// Star / watch / branch controls as one Liquid Glass group.
     private func actionBar(_ summary: RepoSummary) -> some View {
+        ScrollView(.horizontal, showsIndicators: false) {
         GlassEffectContainer(spacing: 10) {
             HStack(spacing: 10) {
                 Button {
@@ -148,7 +149,10 @@ struct RepoDetailScreen: View {
                 .buttonStyle(.glass)
                 .glassEffectID("branch", in: glassNamespace)
             }
+            .lineLimit(1)
         }
+        }
+        .scrollClipDisabled()
     }
 
     private func sections(_ summary: RepoSummary) -> some View {
@@ -234,12 +238,20 @@ struct RepoDetailScreen: View {
     private func toggleWatch() async {
         guard let watching = isWatching else { return }
         isWatching = !watching
+        adjustWatchers(by: watching ? -1 : 1)
         do {
             try await env.repository.setWatching(repo, watching: !watching)
         } catch {
             isWatching = watching
+            adjustWatchers(by: watching ? 1 : -1)
             self.error = error.localizedDescription
         }
+    }
+
+    private func adjustWatchers(by delta: Int) {
+        guard case .loaded(var current) = detail else { return }
+        current.watchersCount = max(0, current.watchersCount + delta)
+        detail = .loaded(current)
     }
 }
 
