@@ -1,13 +1,20 @@
 import SwiftUI
 import Observation
+import MaxxingShared
 
-/// Drives the Device Flow polling loop (port of the flow in DeviceFlowClient.kt / SignInScreen.kt).
+/// Observes the shared Kotlin Device Flow (core/auth `DeviceFlowClient` via `SessionManager.startDeviceFlow`).
+/// Polling, slow-down handling and Keychain persistence run in Kotlin; this model maps its states for the UI.
 @Observable
 final class SignInModel {
+    struct DeviceCode: Equatable {
+        let userCode: String
+        let verificationURI: String
+    }
+
     enum Phase: Equatable {
         case idle
         case requestingCode
-        case awaitingUser(DeviceFlowClient.DeviceCode, status: Status)
+        case awaitingUser(DeviceCode, status: Status)
         case verifying
         case failed(String)
     }
@@ -17,64 +24,59 @@ final class SignInModel {
     }
 
     var phase: Phase = .idle
-    @ObservationIgnored private var task: Task<Void, Never>?
-    @ObservationIgnored private let client = DeviceFlowClient()
+    @ObservationIgnored private var flow: Cancellable?
 
-    func start(clientID: String, onSession: @escaping (AuthSession) throws -> Void) {
+    /// The session itself is saved by the Kotlin `SessionManager`; `SessionManager.session` updates on success.
+    func start(core: MaxxingCore, clientID: String) {
         cancel()
-        task = Task {
-            phase = .requestingCode
-            do {
-                let code = try await client.requestDeviceCode(clientID: clientID)
-                phase = .awaitingUser(code, status: .codeIssued)
-                var interval = code.interval
-                var elapsed = 0
-                while elapsed < code.expiresIn {
-                    try await Task.sleep(for: .seconds(interval))
-                    elapsed += interval
-                    let result: DeviceFlowClient.PollResult
-                    do {
-                        result = try await client.pollAccessToken(clientID: clientID, deviceCode: code.deviceCode)
-                    } catch is CancellationError {
-                        return
-                    } catch {
-                        phase = .awaitingUser(code, status: .networkRetry)
-                        continue
-                    }
-                    switch result {
-                    case .authorized(let session):
-                        phase = .verifying
-                        try onSession(session)
-                        return
-                    case .pending:
-                        phase = .awaitingUser(code, status: .pending)
-                    case .slowDown(let newInterval):
-                        interval = newInterval ?? interval + 5
-                        phase = .awaitingUser(code, status: .slowDown(interval))
-                    case .expired:
-                        phase = .failed(String(localized: "The device code expired. Request a new code."))
-                        return
-                    case .denied:
-                        phase = .failed(String(localized: "Authorization was denied in the browser."))
-                        return
-                    case .failed(_, let description):
-                        phase = .failed(description)
-                        return
-                    }
-                }
-                phase = .failed(String(localized: "Device code timed out. Please try again."))
-            } catch is CancellationError {
-                return
-            } catch {
-                phase = .failed(error.localizedDescription)
-            }
+        phase = .requestingCode
+        flow = core.startDeviceFlow(clientId: clientID) { [weak self] state in
+            self?.apply(state)
         }
     }
 
     func cancel() {
-        task?.cancel()
-        task = nil
+        flow?.cancel()
+        flow = nil
         phase = .idle
+    }
+
+    private func apply(_ state: any DeviceCodeState) {
+        switch state {
+        case is DeviceCodeStateIdle:
+            phase = .idle
+        case is DeviceCodeStateRequestingCode:
+            phase = .requestingCode
+        case let waiting as DeviceCodeStateAwaitingUser:
+            let code = DeviceCode(userCode: waiting.userCode, verificationURI: waiting.verificationUri)
+            phase = .awaitingUser(code, status: Self.status(waiting))
+        case is DeviceCodeStateVerifying, is DeviceCodeStateAuthenticated:
+            phase = .verifying
+        case let error as DeviceCodeStateError:
+            phase = .failed(Self.message(error))
+        default:
+            break
+        }
+    }
+
+    private static func status(_ state: DeviceCodeStateAwaitingUser) -> Status {
+        switch state.waitReason {
+        case DeviceFlowWaitReason.authorizationPending: .pending
+        case DeviceFlowWaitReason.networkRetry: .networkRetry
+        case DeviceFlowWaitReason.slowDown: .slowDown(Int(state.intervalSeconds))
+        default: .codeIssued
+        }
+    }
+
+    private static func message(_ error: DeviceCodeStateError) -> String {
+        switch error.kind {
+        case .missingClientId: String(localized: "No OAuth Client ID is configured.")
+        case .network: String(localized: "Network error. Check your connection and try again.")
+        case .expired: String(localized: "The device code expired. Request a new code.")
+        case .denied: String(localized: "Authorization was denied in the browser.")
+        case .timedOut: String(localized: "Device code timed out. Please try again.")
+        default: error.message
+        }
     }
 }
 
@@ -151,7 +153,7 @@ struct SignInScreen: View {
                     .glassPanel(cornerRadius: 20, tint: .red.opacity(0.08))
             }
             Button {
-                model.start(clientID: env.preferences.effectiveClientID, onSession: signIn)
+                model.start(core: env.sessionManager.core, clientID: env.preferences.effectiveClientID)
             } label: {
                 Label("Sign in with GitHub", systemImage: "person.badge.key")
                     .font(.headline)
@@ -180,7 +182,7 @@ struct SignInScreen: View {
         }
     }
 
-    private func codePanel(_ code: DeviceFlowClient.DeviceCode, status: SignInModel.Status) -> some View {
+    private func codePanel(_ code: SignInModel.DeviceCode, status: SignInModel.Status) -> some View {
         VStack(spacing: 16) {
             Text("Enter this code on GitHub")
                 .font(.headline)
@@ -229,10 +231,6 @@ struct SignInScreen: View {
     private var backgroundGradient: some View {
         LinearGradient(colors: [Color.accentColor.opacity(0.25), .clear], startPoint: .top, endPoint: .center)
     }
-
-    private func signIn(_ session: AuthSession) throws {
-        try env.sessionManager.signIn(session)
-    }
 }
 
 private struct PersonalAccessTokenSheet: View {
@@ -280,8 +278,7 @@ private struct PersonalAccessTokenSheet: View {
         isVerifying = true
         defer { isVerifying = false }
         do {
-            let session = try await DeviceFlowClient().verifyPersonalAccessToken(token)
-            try env.sessionManager.signIn(session)
+            try await env.sessionManager.signIn(personalAccessToken: token.trimmingCharacters(in: .whitespacesAndNewlines))
             dismiss()
         } catch {
             self.error = error.localizedDescription

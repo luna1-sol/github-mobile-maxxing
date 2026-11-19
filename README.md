@@ -74,14 +74,15 @@ xcodebuild -project iosApp/iosApp.xcodeproj -scheme iosApp -sdk iphonesimulator 
 Or open `iosApp/iosApp.xcodeproj` in Xcode and run on a simulator or device.
 
 #### iOS (native SwiftUI, Liquid Glass) — work in progress
-`iosNativeApp/` is a pure Swift/SwiftUI port of the app that adopts iOS 26 **Liquid Glass** (glass tab bar with a separate search tab and scroll-to-minimize, `GlassEffectContainer` filter chips and action bars with morphing, glass/glass-prominent buttons, and a floating glass comment composer). It does not use Gradle or the Kotlin framework, and installs side by side with the Compose app (bundle ID `io.github.neutron42-jp.gitmax.native`).
+`iosNativeApp/` is a SwiftUI front end that adopts iOS 26 **Liquid Glass** (glass tab bar with a separate search tab and scroll-to-minimize, `GlassEffectContainer` filter chips and action bars with morphing, glass/glass-prominent buttons, and a floating glass comment composer). Auth, networking, caching and models are **not** reimplemented: they come from the shared `core/model`, `core/auth` and `core/network` modules through the `MaxxingShared` framework, so fixes there apply to both iOS apps. It installs side by side with the Compose app (bundle ID `io.github.neutron42-jp.gitmax.native`).
 
-Requires macOS and Xcode 26+ with an iOS 26 Simulator runtime.
+Requires macOS, Xcode 26+ with an iOS 26 Simulator runtime, and JDK 17+ (the Xcode build runs Gradle; the Android SDK is not needed).
 
-- **Ported so far**: Device Flow / PAT sign-in (Keychain storage, token refresh), Home (contributions, pinned & recent repos, activity feed), Inbox (filters, swipe to done / mark read), Issues & PRs (presets, timeline, comments, reactions, review, merge, draft toggle, file diffs), Repositories (detail, star/watch, branch switcher, file tree, code viewer, README, commits), user profiles, global search, and settings.
-- **Not ported yet**: Actions, Releases, Discussions, Security, Insights, Gists, labels/milestones management, file editing, background notifications.
-- **Layout**: `iosNativeApp/iosNativeApp/Core/{Model,Auth,Network,UI}` mirror `core/{model,auth,network,ui}`, and `App/` mirrors `composeApp`.
+- **Architecture**: `iosNativeApp/shared` is the `:iosNativeShared` Gradle module. It exports the core modules as the static `MaxxingShared` framework and adds `MaxxingCore`, a small facade that turns `Result`/`Flow` APIs into Swift-friendly `async throws` functions and callbacks. On the Swift side, `Core/Bridge` maps the Kotlin models to Swift value types, `Core/Network/GitHubRepository.swift` and `Core/Auth/SessionManager.swift` wrap `MaxxingCore`, and `App/` holds the SwiftUI screens (mirroring `composeApp`).
+- **Ported screens so far**: Device Flow / PAT sign-in, Home (contributions, pinned & recent repos, activity feed), Inbox (filters, swipe to done / mark read), Issues & PRs (presets, timeline, comments, reactions, review, merge, draft toggle, file diffs), Repositories (detail, star/watch, branch switcher, file tree, code viewer, README, commits), user profiles, global search, and settings.
+- **Screens not ported yet** (available in the Compose app): Actions, Releases, Discussions, Security, Insights, Gists, labels/milestones management, file editing, background notifications. The data layer for these already exists in `core/network`; they need SwiftUI screens and `MaxxingCore` entry points.
 - **XcodeGen**: `iosNativeApp/iosNativeApp.xcodeproj` is checked in. Only run `xcodegen generate` inside `iosNativeApp/` if you edit `iosNativeApp/project.yml` or add/remove files.
+- **Building from the Xcode GUI**: if Xcode cannot find a JDK, copy `iosNativeApp/Configuration/local.env.example` to `iosNativeApp/Configuration/local.env` and set `JAVA_HOME`.
 - **Device signing (optional)**: copy `iosNativeApp/Configuration/Local.xcconfig.example` to `iosNativeApp/Configuration/Local.xcconfig` and set `TEAM_ID`.
 
 ```bash

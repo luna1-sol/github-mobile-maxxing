@@ -46,7 +46,7 @@ struct SettingsScreen: View {
 
                 Section("About") {
                     LabeledContent("Version", value: appVersion)
-                    let rate = env.httpClient.rateLimit
+                    let rate = env.repository.rateLimit
                     LabeledContent("API rate limit", value: "\(rate.remaining) / \(rate.limit)")
                     Button("Source code", systemImage: "chevron.left.forwardslash.chevron.right") {
                         env.router.openExternally(AppBranding.repositoryURL)

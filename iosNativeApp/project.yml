@@ -2,7 +2,8 @@
 # committed so that `xcodebuild -project iosNativeApp/iosNativeApp.xcodeproj ...` works without XcodeGen.
 # Regenerate with: cd iosNativeApp && xcodegen generate
 #
-# Unlike iosApp (Compose Multiplatform host), this target is pure Swift/SwiftUI and does not invoke Gradle.
+# The UI is SwiftUI; auth, networking and models come from the shared Kotlin modules (core/model, core/auth,
+# core/network) through the MaxxingShared framework built by the :iosNativeShared Gradle module (iosNativeApp/shared).
 name: iosNativeApp
 configFiles:
   Debug: Configuration/Config.xcconfig
@@ -18,7 +19,8 @@ settings:
     SWIFT_APPROACHABLE_CONCURRENCY: YES
     SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY: YES
     LOCALIZATION_PREFERS_STRING_CATALOGS: YES
-    ENABLE_USER_SCRIPT_SANDBOXING: YES
+    # The Gradle Run Script reads and writes outside the sandbox (same as iosApp).
+    ENABLE_USER_SCRIPT_SANDBOXING: NO
 targets:
   iosNativeApp:
     type: application
@@ -49,6 +51,34 @@ targets:
         TARGETED_DEVICE_FAMILY: "1,2"
         SWIFT_EMIT_LOC_STRINGS: YES
         STRING_CATALOG_GENERATE_SYMBOLS: NO
+        # MaxxingShared.framework is copied here by embedAndSignAppleFrameworkForXcode (static framework).
+        FRAMEWORK_SEARCH_PATHS: $(inherited) $(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
+        OTHER_LDFLAGS: $(inherited) -framework MaxxingShared
+        # Kotlin/Native only builds iosArm64 and iosSimulatorArm64.
+        "EXCLUDED_ARCHS[sdk=iphonesimulator*]": x86_64
+      configs:
+        Debug:
+          # Gradle's embedAndSignAppleFrameworkForXcode selects the build type from this.
+          KOTLIN_FRAMEWORK_BUILD_TYPE: debug
+          SWIFT_ACTIVE_COMPILATION_CONDITIONS: DEBUG
+        Release:
+          KOTLIN_FRAMEWORK_BUILD_TYPE: release
+    preBuildScripts:
+      - name: Build Kotlin framework
+        basedOnDependencyAnalysis: false
+        script: |
+          if [ "YES" = "$OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED" ]; then
+            echo "Skipping Gradle build task invocation due to OVERRIDE_KOTLIN_BUILD_IDE_SUPPORTED=YES"
+            exit 0
+          fi
+          # Machine-specific settings (JAVA_HOME, ...) live in a gitignored file.
+          [ -f "$SRCROOT/Configuration/local.env" ] && . "$SRCROOT/Configuration/local.env"
+          if [ -z "$JAVA_HOME" ]; then
+            JAVA_HOME="$(/usr/libexec/java_home 2>/dev/null)" || { echo "error: JAVA_HOME is not set. Set it in iosNativeApp/Configuration/local.env"; exit 1; }
+            export JAVA_HOME
+          fi
+          cd "$SRCROOT/.."
+          ./gradlew :iosNativeShared:embedAndSignAppleFrameworkForXcode
   iosNativeAppTests:
     type: bundle.unit-test
     platform: iOS
@@ -65,6 +95,8 @@ targets:
         DEVELOPMENT_TEAM: $(TEAM_ID)
         TEST_HOST: $(BUILT_PRODUCTS_DIR)/iosNativeApp.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/iosNativeApp
         BUNDLE_LOADER: $(TEST_HOST)
+        FRAMEWORK_SEARCH_PATHS: $(inherited) $(SRCROOT)/shared/build/xcode-frameworks/$(CONFIGURATION)/$(SDK_NAME)
+        "EXCLUDED_ARCHS[sdk=iphonesimulator*]": x86_64
 schemes:
   iosNativeApp:
     build:

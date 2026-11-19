@@ -10,7 +10,7 @@ struct InboxScreen: View {
     var body: some View {
         let filter = env.preferences.inboxFilter
         AsyncContent(state, emptyTitle: filter == .unread ? "Inbox zero" : "No notifications",
-                     emptySystemImage: "tray", retry: { await load() }, isRefreshing: isSwitching) { threads in
+                     emptySystemImage: "tray", retry: { await load(force: true) }, isRefreshing: isSwitching) { threads in
             List {
                 ForEach(threads) { thread in
                     Button { open(thread) } label: { NotificationRow(thread: thread) }
@@ -62,7 +62,7 @@ struct InboxScreen: View {
                     .disabled(!(state.value?.contains(where: \.unread) ?? false))
             }
         }
-        .refreshable { await load() }
+        .refreshable { await load(force: true) }
         .task(id: filter) {
             guard state.value != nil else { return await load() }
             isSwitching = true
@@ -72,7 +72,7 @@ struct InboxScreen: View {
         .errorAlert($error)
     }
 
-    private func load(replacing: Bool = false) async {
+    private func load(replacing: Bool = false, force: Bool = false) async {
         let filter = env.preferences.inboxFilter
         let operation = { try await env.repository.notifications(filter: filter) }
         if replacing { await replaceState($state, operation) } else { await loadState($state, operation) }
@@ -118,7 +118,7 @@ struct InboxScreen: View {
         do {
             try await env.repository.markAllNotificationsRead()
             env.unreadCount = 0
-            await load()
+            await load(force: true)
         } catch {
             self.error = error.localizedDescription
         }

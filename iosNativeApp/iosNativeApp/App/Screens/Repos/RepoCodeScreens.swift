@@ -10,7 +10,7 @@ struct DirectoryScreen: View {
     @State private var state: LoadState<[TreeEntry]> = .loading
 
     var body: some View {
-        AsyncContent(state, emptyTitle: "Empty directory", emptySystemImage: "folder", retry: { await load() }) { entries in
+        AsyncContent(state, emptyTitle: "Empty directory", emptySystemImage: "folder", retry: { await load(force: true) }) { entries in
             List(entries) { entry in
                 NavigationLink(value: entry.type == .tree
                                ? Route.directory(repo, path: entry.path, ref: ref)
@@ -41,12 +41,12 @@ struct DirectoryScreen: View {
                 }
             }
         }
-        .refreshable { await load() }
+        .refreshable { await load(force: true) }
         .task(id: "\(path)@\(ref ?? "")") { await load() }
     }
 
-    private func load() async {
-        await loadState($state) { try await env.repository.directory(repo, path: path, ref: ref) }
+    private func load(force: Bool = false) async {
+        await loadState($state) { try await env.repository.directory(repo, path: path, ref: ref, forceRefresh: force) }
     }
 }
 
@@ -91,7 +91,7 @@ struct FileScreen: View {
                     .padding()
                 }
             } else {
-                AsyncContent(state, retry: { await load() }) { file in
+                AsyncContent(state, retry: { await load(force: true) }) { file in
                     if file.isBinary {
                         ContentUnavailableView("Binary file", systemImage: "doc.zipper",
                                                description: Text("\(Formatting.bytes(file.size)) — open it in the browser to download."))
@@ -154,11 +154,14 @@ struct FileScreen: View {
     }
 
     private var rawURL: URL? {
-        URL(string: "https://raw.githubusercontent.com/\(repo.owner)/\(repo.name)/\(ref ?? "HEAD")/\(APIPath.subPath(path))")
+        var allowed = CharacterSet.urlPathAllowed
+        allowed.remove(charactersIn: "?#;")
+        let encodedPath = path.addingPercentEncoding(withAllowedCharacters: allowed) ?? path
+        return URL(string: "https://raw.githubusercontent.com/\(repo.owner)/\(repo.name)/\(ref ?? "HEAD")/\(encodedPath)")
     }
 
-    private func load() async {
-        await loadState($state) { try await env.repository.file(repo, path: path, ref: ref) }
+    private func load(force: Bool = false) async {
+        await loadState($state) { try await env.repository.file(repo, path: path, ref: ref, forceRefresh: force) }
     }
 }
 
@@ -170,7 +173,7 @@ struct CommitsScreen: View {
     @State private var state: LoadState<[CommitSummary]> = .loading
 
     var body: some View {
-        AsyncContent(state, emptyTitle: "No commits", emptySystemImage: "clock", retry: { await load() }) { commits in
+        AsyncContent(state, emptyTitle: "No commits", emptySystemImage: "clock", retry: { await load(force: true) }) { commits in
             List(commits) { commit in
                 NavigationLink(value: Route.commit(repo, sha: commit.sha)) {
                     HStack(alignment: .top, spacing: 12) {
@@ -193,12 +196,12 @@ struct CommitsScreen: View {
         }
         .navigationTitle("Commits")
         .navigationBarTitleDisplayMode(.inline)
-        .refreshable { await load() }
+        .refreshable { await load(force: true) }
         .task(id: ref) { await load() }
     }
 
-    private func load() async {
-        await loadState($state) { try await env.repository.commits(repo, ref: ref) }
+    private func load(force: Bool = false) async {
+        await loadState($state) { try await env.repository.commits(repo, ref: ref, forceRefresh: force) }
     }
 }
 
@@ -211,7 +214,7 @@ struct CommitDetailScreen: View {
     @State private var expanded: Set<String> = []
 
     var body: some View {
-        AsyncContent(state, retry: { await load() }) { detail in
+        AsyncContent(state, retry: { await load(force: true) }) { detail in
             List {
                 Section {
                     VStack(alignment: .leading, spacing: 8) {
@@ -263,7 +266,7 @@ struct CommitDetailScreen: View {
         .task(id: sha) { await load() }
     }
 
-    private func load() async {
-        await loadState($state) { try await env.repository.commitDetail(repo, sha: sha) }
+    private func load(force: Bool = false) async {
+        await loadState($state) { try await env.repository.commitDetail(repo, sha: sha, forceRefresh: force) }
     }
 }

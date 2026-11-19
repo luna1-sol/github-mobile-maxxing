@@ -17,7 +17,7 @@ struct RepoDetailScreen: View {
     private var ref: String? { selectedRef ?? detail.value?.summary.defaultBranch }
 
     var body: some View {
-        AsyncContent(detail, retry: { await load() }) { detail in
+        AsyncContent(detail, retry: { await load(force: true) }) { detail in
             ScrollView {
                 VStack(alignment: .leading, spacing: 18) {
                     header(detail)
@@ -28,7 +28,7 @@ struct RepoDetailScreen: View {
                 .padding()
             }
             .scrollEdgeEffectStyle(.soft, for: .top)
-            .refreshable { await load() }
+            .refreshable { await load(force: true) }
         }
         .navigationTitle(repo.name)
         .navigationBarTitleDisplayMode(.inline)
@@ -206,17 +206,18 @@ struct RepoDetailScreen: View {
 
     // MARK: Loading & actions
 
-    private func load() async {
-        await loadState($detail) { try await env.repository.repoDetail(repo) }
+    private func load(force: Bool = false) async {
+        await loadState($detail) { try await env.repository.repoDetail(repo, forceRefresh: force) }
         if let list = try? await env.repository.branches(repo) { branches = list }
-        isWatching = try? await env.repository.isWatching(repo)
+        isWatching = try? await env.repository.isWatching(repo, forceRefresh: force)
+        if force { await loadReadme(force: true) }
     }
 
-    private func loadReadme() async {
+    private func loadReadme(force: Bool = false) async {
         guard detail.value != nil else { return }
         readme = .loading
         let ref = ref
-        await loadState($readme) { try await env.repository.readme(repo, ref: ref) }
+        await loadState($readme) { try await env.repository.readme(repo, ref: ref, forceRefresh: force) }
     }
 
     private func toggleStar(_ summary: RepoSummary) async {

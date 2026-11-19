@@ -34,3 +34,7 @@ include(":core:network")
 include(":core:ui")
 include(":composeApp")
 include(":androidApp")
+
+// Kotlin bridge framework for the native SwiftUI app; lives next to it under iosNativeApp/.
+include(":iosNativeShared")
+project(":iosNativeShared").projectDir = file("iosNativeApp/shared")

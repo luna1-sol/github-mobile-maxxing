@@ -61,26 +61,6 @@
         }
       }
     },
-    "%@ issue %@": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Issue %2$@ を %1$@"
-          }
-        }
-      }
-    },
-    "%@ pull request %@": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "プルリクエスト %2$@ を %1$@"
-          }
-        }
-      }
-    },
     "%@ release %@": {
       "localizations": {
         "ja": {
@@ -831,16 +811,6 @@
         }
       }
     },
-    "Failed to create issue": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "Issue の作成に失敗しました"
-          }
-        }
-      }
-    },
     "Failed to fetch file": {
       "localizations": {
         "ja": {
@@ -861,32 +831,12 @@
         }
       }
     },
-    "Failed to load PR files": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "PR のファイルを読み込めませんでした"
-          }
-        }
-      }
-    },
     "Failed to load README": {
       "localizations": {
         "ja": {
           "stringUnit": {
             "state": "translated",
             "value": "README を読み込めませんでした"
-          }
-        }
-      }
-    },
-    "Failed to load activity feed": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "アクティビティフィードの読み込みに失敗しました"
           }
         }
       }
@@ -917,16 +867,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "コミットの読み込みに失敗しました"
-          }
-        }
-      }
-    },
-    "Failed to load labels": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ラベルの読み込みに失敗しました"
           }
         }
       }
@@ -971,16 +911,6 @@
         }
       }
     },
-    "Failed to load user events": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "ユーザーのアクティビティを読み込めませんでした"
-          }
-        }
-      }
-    },
     "Failed to load users": {
       "localizations": {
         "ja": {
@@ -1021,26 +951,6 @@
         }
       }
     },
-    "Failed to post comment": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "コメントの投稿に失敗しました"
-          }
-        }
-      }
-    },
-    "Failed to submit review": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "レビューを送信できませんでした"
-          }
-        }
-      }
-    },
     "Failed to unwatch repository": {
       "localizations": {
         "ja": {
@@ -1067,16 +977,6 @@
           "stringUnit": {
             "state": "translated",
             "value": "スター状態の更新に失敗しました"
-          }
-        }
-      }
-    },
-    "Failed to update state": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "状態の更新に失敗しました"
           }
         }
       }
@@ -1471,16 +1371,6 @@
         }
       }
     },
-    "Merge failed": {
-      "localizations": {
-        "ja": {
-          "stringUnit": {
-            "state": "translated",
-            "value": "マージに失敗しました"
-          }
-        }
-      }
-    },
     "Merge this pull request?": {
       "localizations": {
         "ja": {
@@ -1581,12 +1471,32 @@
         }
       }
     },
+    "Network error. Check your connection and try again.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ネットワークエラーが発生しました。接続を確認してもう一度お試しください。"
+          }
+        }
+      }
+    },
     "New issue": {
       "localizations": {
         "ja": {
           "stringUnit": {
             "state": "translated",
             "value": "新しい Issue"
+          }
+        }
+      }
+    },
+    "No OAuth Client ID is configured.": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "OAuth Client ID が設定されていません。"
           }
         }
       }
@@ -2731,6 +2641,26 @@
         }
       }
     },
+    "closed issue %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Issue %@ をクローズしました"
+          }
+        }
+      }
+    },
+    "closed pull request %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエスト %@ をクローズしました"
+          }
+        }
+      }
+    },
     "closed this": {
       "localizations": {
         "ja": {
@@ -2747,6 +2677,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "%@ にコメントしました"
+          }
+        }
+      }
+    },
+    "commented on a thread": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "スレッドにコメントしました"
           }
         }
       }
@@ -2831,12 +2771,72 @@
         }
       }
     },
+    "merged pull request %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエスト %@ をマージしました"
+          }
+        }
+      }
+    },
+    "opened issue %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Issue %@ を作成しました"
+          }
+        }
+      }
+    },
+    "opened pull request %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエスト %@ を作成しました"
+          }
+        }
+      }
+    },
+    "published release %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リリース %@ を公開しました"
+          }
+        }
+      }
+    },
     "pushed %lld commit(s) to %@": {
       "localizations": {
         "ja": {
           "stringUnit": {
             "state": "translated",
             "value": "%2$@ に %1$lld 件のコミットをプッシュしました"
+          }
+        }
+      }
+    },
+    "reopened issue %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Issue %@ を再オープンしました"
+          }
+        }
+      }
+    },
+    "reopened pull request %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエスト %@ を再オープンしました"
           }
         }
       }
@@ -2927,6 +2927,26 @@
           "stringUnit": {
             "state": "translated",
             "value": "タグ"
+          }
+        }
+      }
+    },
+    "updated issue %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "Issue %@ を更新しました"
+          }
+        }
+      }
+    },
+    "updated pull request %@": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "プルリクエスト %@ を更新しました"
           }
         }
       }

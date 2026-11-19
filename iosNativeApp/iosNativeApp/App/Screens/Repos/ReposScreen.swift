@@ -15,7 +15,7 @@ struct ReposScreen: View {
 
     var body: some View {
         let current = scope == .mine ? mine : starred
-        AsyncContent(current, emptyTitle: "No repositories", emptySystemImage: "books.vertical", retry: { await load() }) { repos in
+        AsyncContent(current, emptyTitle: "No repositories", emptySystemImage: "books.vertical", retry: { await load(force: true) }) { repos in
             let shown = filtered(repos)
             List(shown) { repo in
                 NavigationLink(value: Route.repo(repo.ref)) { RepoRow(repo: repo) }
@@ -46,7 +46,7 @@ struct ReposScreen: View {
         }
         .searchable(text: $filter, placement: .navigationBarDrawer, prompt: "Filter")
         .navigationTitle("Repositories")
-        .refreshable { await load() }
+        .refreshable { await load(force: true) }
         .task(id: scope) { await load() }
     }
 
@@ -58,10 +58,10 @@ struct ReposScreen: View {
         }
     }
 
-    private func load() async {
+    private func load(force: Bool = false) async {
         switch scope {
-        case .mine: await loadState($mine) { try await env.repository.viewerRepositories() }
-        case .starred: await loadState($starred) { try await env.repository.starredRepositories() }
+        case .mine: await loadState($mine) { try await env.repository.viewerRepositories(forceRefresh: force) }
+        case .starred: await loadState($starred) { try await env.repository.starredRepositories(forceRefresh: force) }
         }
     }
 }

@@ -37,7 +37,7 @@ struct RootView: View {
                 } description: {
                     Text("Secure storage is unavailable: \(error). If the device was just restarted, unlock it and try again.")
                 } actions: {
-                    Button("Try again") { env.sessionManager.load() }
+                    Button("Try again") { Task { await env.sessionManager.load() } }
                         .buttonStyle(.glassProminent)
                 }
             } else if env.sessionManager.isSignedIn {
@@ -47,7 +47,7 @@ struct RootView: View {
             }
         }
         .animation(.smooth, value: env.sessionManager.isSignedIn)
-        .task { if !env.sessionManager.isLoaded { env.sessionManager.load() } }
+        .task { if !env.sessionManager.isLoaded { await env.sessionManager.load() } }
         .environment(\.openURL, OpenURLAction { url in
             if env.router.open(url) { return .handled }
             if url.scheme == "https" || url.scheme == "http" {

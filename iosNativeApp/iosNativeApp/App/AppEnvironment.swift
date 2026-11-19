@@ -1,12 +1,12 @@
 import SwiftUI
 import Observation
+import MaxxingShared
 
 /// Object graph of the app (counterpart of composeApp's AppContainer.kt), injected with `.environment`.
 @Observable
 final class AppEnvironment {
     let preferences: AppPreferences
     let sessionManager: SessionManager
-    let httpClient: GitHubHttpClient
     let repository: GitHubRepository
     let router = AppRouter()
 
@@ -15,17 +15,18 @@ final class AppEnvironment {
     /// Unread notification count for the Inbox tab badge.
     var unreadCount = 0
 
-    init(preferences: AppPreferences = AppPreferences(), sessionManager: SessionManager = SessionManager()) {
+    init(preferences: AppPreferences = AppPreferences()) {
+        // Shared Kotlin core (core/auth + core/network); one instance owns the session and HTTP caches.
+        let core = MaxxingCore(defaultClientId: AppBranding.defaultOAuthClientID)
         self.preferences = preferences
-        self.sessionManager = sessionManager
-        httpClient = GitHubHttpClient(sessionManager: sessionManager)
-        repository = GitHubRepository(client: httpClient)
+        sessionManager = SessionManager(core: core)
+        repository = GitHubRepository(core: core)
     }
 
     var viewerLogin: String? { viewer?.login ?? sessionManager.session?.userLogin }
 
     func refreshViewer() async {
-        if let profile = try? await repository.viewerProfile() { viewer = profile }
+        if let profile = try? await repository.viewerProfile(forceRefresh: true) { viewer = profile }
     }
 
     func refreshUnreadCount() async {

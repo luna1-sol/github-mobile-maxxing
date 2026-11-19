@@ -18,7 +18,7 @@ struct IssuePullDetailScreen: View {
     @Namespace private var glassNamespace
 
     var body: some View {
-        AsyncContent(state, retry: { await load() }) { detail in
+        AsyncContent(state, retry: { await load(force: true) }) { detail in
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 16) {
                     DetailHeader(detail: detail)
@@ -38,7 +38,7 @@ struct IssuePullDetailScreen: View {
                 .padding()
             }
             .scrollDismissesKeyboard(.interactively)
-            .refreshable { await load() }
+            .refreshable { await load(force: true) }
         }
         .safeAreaInset(edge: .bottom, spacing: 0) {
             if let detail = state.value { bottomBar(detail) }
@@ -59,13 +59,13 @@ struct IssuePullDetailScreen: View {
         .toolbar { toolbarContent }
         .task(id: ref) { await load() }
         .sheet(isPresented: $showsReview) {
-            ReviewSheet(ref: ref) { await load() }
+            ReviewSheet(ref: ref) { await load(force: true) }
         }
         .sheet(isPresented: $showsEditor) {
             MarkdownEditorSheet(title: "Comment", text: $draft, submitTitle: "Comment") { await postComment() }
         }
         .sheet(item: $editingComment) { comment in
-            EditCommentSheet(comment: comment) { await load() }
+            EditCommentSheet(ref: ref, comment: comment) { await load(force: true) }
         }
         .confirmationDialog("Delete this comment?", isPresented: Binding(get: { deletingComment != nil }, set: { if !$0 { deletingComment = nil } }),
                             titleVisibility: .visible, presenting: deletingComment) { comment in
@@ -190,8 +190,8 @@ struct IssuePullDetailScreen: View {
 
     // MARK: Actions
 
-    private func load() async {
-        await loadState($state) { try await env.repository.issueOrPullDetail(ref) }
+    private func load(force: Bool = false) async {
+        await loadState($state) { try await env.repository.issueOrPullDetail(ref, forceRefresh: force) }
     }
 
     private func quote(_ text: String) {
@@ -207,7 +207,7 @@ struct IssuePullDetailScreen: View {
         do {
             try await env.repository.postComment(ref, body: body)
             draft = ""
-            await load()
+            await load(force: true)
         } catch {
             self.error = error.localizedDescription
         }
@@ -215,8 +215,8 @@ struct IssuePullDetailScreen: View {
 
     private func react(subjectID: String, content: String, reacted: Bool) async {
         do {
-            try await env.repository.toggleReaction(subjectID: subjectID, content: content, currentlyReacted: reacted)
-            await load()
+            try await env.repository.toggleReaction(ref, subjectID: subjectID, content: content, currentlyReacted: reacted)
+            await load(force: true)
         } catch {
             self.error = error.localizedDescription
         }
@@ -227,7 +227,7 @@ struct IssuePullDetailScreen: View {
     }
 
     private func toggleDraft(_ detail: IssueOrPullDetail) async {
-        await mutate { try await env.repository.setDraft(pullRequestID: detail.id, draft: !detail.isDraft) }
+        await mutate { try await env.repository.setDraft(ref, pullRequestID: detail.id, draft: !detail.isDraft) }
     }
 
     private func merge(_ method: MergeMethod) async {
@@ -235,7 +235,7 @@ struct IssuePullDetailScreen: View {
     }
 
     private func deleteComment(_ comment: TimelineEvent.CommentEvent) async {
-        await mutate { try await env.repository.deleteComment(id: comment.id) }
+        await mutate { try await env.repository.deleteComment(ref, id: comment.id) }
     }
 
     private func mutate(_ operation: () async throws -> Void) async {
@@ -243,7 +243,7 @@ struct IssuePullDetailScreen: View {
         defer { isMutating = false }
         do {
             try await operation()
-            await load()
+            await load(force: true)
         } catch {
             self.error = error.localizedDescription
         }
@@ -693,6 +693,7 @@ struct MarkdownEditorSheet: View {
 }
 
 private struct EditCommentSheet: View {
+    let ref: IssueRef
     let comment: TimelineEvent.CommentEvent
     let onSaved: () async -> Void
 
@@ -704,7 +705,7 @@ private struct EditCommentSheet: View {
     var body: some View {
         MarkdownEditorSheet(title: "Edit comment", text: $text, submitTitle: "Save") {
             do {
-                try await env.repository.updateComment(id: comment.id, body: text)
+                try await env.repository.updateComment(ref, id: comment.id, body: text)
                 await onSaved()
                 dismiss()
             } catch {
@@ -787,7 +788,7 @@ struct PullFilesScreen: View {
     @State private var expanded: Set<String> = []
 
     var body: some View {
-        AsyncContent(state, emptyTitle: "No changed files", emptySystemImage: "doc", retry: { await load() }) { files in
+        AsyncContent(state, emptyTitle: "No changed files", emptySystemImage: "doc", retry: { await load(force: true) }) { files in
             List(files) { file in
                 DisclosureGroup(isExpanded: Binding(
                     get: { expanded.contains(file.id) },
@@ -816,7 +817,7 @@ struct PullFilesScreen: View {
         .task(id: ref) { await load() }
     }
 
-    private func load() async {
-        await loadState($state) { try await env.repository.pullFiles(ref) }
+    private func load(force: Bool = false) async {
+        await loadState($state) { try await env.repository.pullFiles(ref, forceRefresh: force) }
     }
 }

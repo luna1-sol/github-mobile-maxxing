@@ -20,7 +20,7 @@ struct UserProfileScreen: View {
     @State private var error: String?
 
     var body: some View {
-        AsyncContent(profile, retry: { await load() }) { user in
+        AsyncContent(profile, retry: { await load(force: true) }) { user in
             ScrollView {
                 LazyVStack(alignment: .leading, spacing: 18) {
                     header(user)
@@ -38,7 +38,7 @@ struct UserProfileScreen: View {
                 }
                 .padding()
             }
-            .refreshable { await load() }
+            .refreshable { await load(force: true) }
         }
         .navigationTitle(login)
         .navigationBarTitleDisplayMode(.inline)
@@ -158,15 +158,15 @@ struct UserProfileScreen: View {
         .frame(minHeight: 120)
     }
 
-    private func load() async {
-        await loadState($profile) { try await env.repository.userProfile(login) }
+    private func load(force: Bool = false) async {
+        await loadState($profile) { try await env.repository.userProfile(login, forceRefresh: force) }
         guard let user = profile.value else { return }
-        await loadState($repos) { try await env.repository.userRepositories(login, isOrganization: user.isOrganization) }
+        await loadState($repos) { try await env.repository.userRepositories(login, isOrganization: user.isOrganization, forceRefresh: force) }
         if !user.isOrganization {
-            orgs = (try? await env.repository.organizations(login)) ?? []
-            calendar = try? await env.repository.contributionCalendar(login)
+            orgs = (try? await env.repository.organizations(login, forceRefresh: force)) ?? []
+            calendar = try? await env.repository.contributionCalendar(login, forceRefresh: force)
         }
-        await loadState($events) { try await env.repository.userEvents(login) }
+        await loadState($events) { try await env.repository.userEvents(login, forceRefresh: force) }
     }
 
     private func toggleFollow(_ user: UserProfile) async {
@@ -193,7 +193,7 @@ struct UserListScreen: View {
 
     var body: some View {
         AsyncContent(state, emptyTitle: following ? "Not following anyone" : "No followers", emptySystemImage: "person.2",
-                     retry: { await load() }) { users in
+                     retry: { await load(force: true) }) { users in
             List(users) { user in
                 NavigationLink(value: Route.user(user.login)) { UserRow(user: user) }
             }
@@ -204,12 +204,12 @@ struct UserListScreen: View {
         .task { await load() }
     }
 
-    private func load() async {
+    private func load(force: Bool = false) async {
         await loadState($state) {
             if following {
-                return try await env.repository.following(login)
+                return try await env.repository.following(login, forceRefresh: force)
             } else {
-                return try await env.repository.followers(login)
+                return try await env.repository.followers(login, forceRefresh: force)
             }
         }
     }

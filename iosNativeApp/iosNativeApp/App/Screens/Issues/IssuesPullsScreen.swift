@@ -16,7 +16,7 @@ struct IssuesPullsScreen: View {
 
     var body: some View {
         AsyncContent(state, emptyTitle: "No matching issues or pull requests", emptySystemImage: "checkmark.circle",
-                     retry: { await load() }, isRefreshing: isSwitching) { items in
+                     retry: { await load(force: true) }, isRefreshing: isSwitching) { items in
             List(items) { item in
                 NavigationLink(value: Route.issue(item.ref)) { IssueRow(item: item) }
             }
@@ -40,7 +40,7 @@ struct IssuesPullsScreen: View {
                 StateFilterMenu(selection: $stateFilter)
             }
         }
-        .refreshable { await load() }
+        .refreshable { await load(force: true) }
         .task(id: Key(login: env.viewerLogin, preset: preset, state: stateFilter)) {
             guard state.value != nil else { return await load() }
             isSwitching = true
@@ -49,10 +49,10 @@ struct IssuesPullsScreen: View {
         }
     }
 
-    private func load(replacing: Bool = false) async {
+    private func load(replacing: Bool = false, force: Bool = false) async {
         guard let login = env.viewerLogin else { return }
         let preset = preset, stateFilter = stateFilter
-        let operation = { try await env.repository.myIssuesAndPulls(preset: preset, viewerLogin: login, state: stateFilter) }
+        let operation = { try await env.repository.myIssuesAndPulls(preset: preset, viewerLogin: login, state: stateFilter, forceRefresh: force) }
         if replacing { await replaceState($state, operation) } else { await loadState($state, operation) }
     }
 }
@@ -87,7 +87,7 @@ struct RepoIssuesScreen: View {
 
     var body: some View {
         AsyncContent(state, emptyTitle: pullRequests ? "No pull requests" : "No issues", emptySystemImage: "tray",
-                     retry: { await load() }, isRefreshing: isSwitching) { items in
+                     retry: { await load(force: true) }, isRefreshing: isSwitching) { items in
             List(items) { item in
                 NavigationLink(value: Route.issue(item.ref)) { IssueRow(item: item, showsRepo: false) }
             }
@@ -109,7 +109,7 @@ struct RepoIssuesScreen: View {
                 env.router.push(.issue(IssueRef(owner: repo.owner, repo: repo.name, number: number)))
             }
         }
-        .refreshable { await load() }
+        .refreshable { await load(force: true) }
         .task(id: stateFilter) {
             guard state.value != nil else { return await load() }
             isSwitching = true
@@ -118,9 +118,9 @@ struct RepoIssuesScreen: View {
         }
     }
 
-    private func load(replacing: Bool = false) async {
+    private func load(replacing: Bool = false, force: Bool = false) async {
         let stateFilter = stateFilter
-        let operation = { try await env.repository.repoIssuesOrPulls(repo, pullRequests: pullRequests, state: stateFilter) }
+        let operation = { try await env.repository.repoIssuesOrPulls(repo, pullRequests: pullRequests, state: stateFilter, forceRefresh: force) }
         if replacing { await replaceState($state, operation) } else { await loadState($state, operation) }
     }
 }

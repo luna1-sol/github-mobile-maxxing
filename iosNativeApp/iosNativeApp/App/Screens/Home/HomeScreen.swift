@@ -54,7 +54,7 @@ struct HomeScreen: View {
             }
         }
         .sheet(isPresented: $showsSettings) { SettingsScreen() }
-        .refreshable { await reload() }
+        .refreshable { await reload(force: true) }
         // Separate tasks so the three requests run concurrently on first appearance.
         .task(id: env.viewerLogin) { await loadRepos() }
         .task(id: env.viewerLogin) { await loadCalendar() }
@@ -121,7 +121,7 @@ struct HomeScreen: View {
         .pickerStyle(.segmented)
 
         AsyncContent(events, emptyTitle: "No recent activity", emptySystemImage: "bolt.horizontal",
-                     retry: { await loadFeed() }, isRefreshing: isSwitchingFeed) { events in
+                     retry: { await loadFeed(force: true) }, isRefreshing: isSwitchingFeed) { events in
             VStack(spacing: 0) {
                 ForEach(events) { event in
                     ActivityRow(event: event)
@@ -142,29 +142,29 @@ struct HomeScreen: View {
         var feed: Feed
     }
 
-    private func reload() async {
-        await loadRepos()
-        await loadCalendar()
-        await loadFeed()
+    private func reload(force: Bool = false) async {
+        await loadRepos(force: force)
+        await loadCalendar(force: force)
+        await loadFeed(force: force)
     }
 
-    private func loadRepos() async {
+    private func loadRepos(force: Bool = false) async {
         guard env.viewerLogin != nil else { return }
-        await loadState($repos) { try await env.repository.viewerRepositories() }
+        await loadState($repos) { try await env.repository.viewerRepositories(forceRefresh: force) }
     }
 
-    private func loadCalendar() async {
+    private func loadCalendar(force: Bool = false) async {
         guard let login = env.viewerLogin else { return }
-        await loadState($calendar) { try await env.repository.contributionCalendar(login) }
+        await loadState($calendar) { try await env.repository.contributionCalendar(login, forceRefresh: force) }
     }
 
-    private func loadFeed() async {
+    private func loadFeed(force: Bool = false) async {
         guard let login = env.viewerLogin else { return }
         let feed = feed
         let operation = {
             switch feed {
-            case .following: try await env.repository.receivedEvents(login)
-            case .myActivity: try await env.repository.userEvents(login)
+            case .following: try await env.repository.receivedEvents(login, forceRefresh: force)
+            case .myActivity: try await env.repository.userEvents(login, forceRefresh: force)
             }
         }
         await loadState($events, operation)
