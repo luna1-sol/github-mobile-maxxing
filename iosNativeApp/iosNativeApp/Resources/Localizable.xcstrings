@@ -2661,6 +2661,16 @@
         }
       }
     },
+    "branch": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "ブランチ"
+          }
+        }
+      }
+    },
     "closed this": {
       "localizations": {
         "ja": {
@@ -2781,6 +2791,16 @@
         }
       }
     },
+    "repository": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "リポジトリ"
+          }
+        }
+      }
+    },
     "requested changes": {
       "localizations": {
         "ja": {
@@ -2837,6 +2857,16 @@
           "stringUnit": {
             "state": "translated",
             "value": "リポジトリにスターを付けました"
+          }
+        }
+      }
+    },
+    "tag": {
+      "localizations": {
+        "ja": {
+          "stringUnit": {
+            "state": "translated",
+            "value": "タグ"
           }
         }
       }

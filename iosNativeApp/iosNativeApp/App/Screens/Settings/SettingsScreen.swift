@@ -111,7 +111,7 @@ struct SettingsScreen: View {
                             env.preferences.accent = preset
                         } label: {
                             Circle()
-                                .fill(preset.color ?? Color(.systemBlue))
+                                .fill(preset.color ?? Color("AccentColor"))
                                 .overlay {
                                     if preset == .system {
                                         Image(systemName: "iphone").font(.caption).foregroundStyle(.white)

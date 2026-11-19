@@ -19,6 +19,7 @@ struct HomeScreen: View {
     @State private var events: LoadState<[ActivityEvent]> = .loading
     @State private var feed: Feed = .following
     @State private var showsSettings = false
+    @State private var isSwitchingFeed = false
 
     var body: some View {
         ScrollView {
@@ -57,7 +58,7 @@ struct HomeScreen: View {
         // Separate tasks so the three requests run concurrently on first appearance.
         .task(id: env.viewerLogin) { await loadRepos() }
         .task(id: env.viewerLogin) { await loadCalendar() }
-        .task(id: FeedKey(login: env.viewerLogin, feed: feed)) { await loadFeed() }
+        .task(id: FeedKey(login: env.viewerLogin, feed: feed)) { await switchFeed() }
     }
 
     // MARK: Sections
@@ -120,7 +121,7 @@ struct HomeScreen: View {
         .pickerStyle(.segmented)
 
         AsyncContent(events, emptyTitle: "No recent activity", emptySystemImage: "bolt.horizontal",
-                     retry: { await loadFeed() }) { events in
+                     retry: { await loadFeed() }, isRefreshing: isSwitchingFeed) { events in
             VStack(spacing: 0) {
                 ForEach(events) { event in
                     ActivityRow(event: event)
@@ -144,7 +145,7 @@ struct HomeScreen: View {
     private func reload() async {
         await loadRepos()
         await loadCalendar()
-        await loadFeed(keepCurrent: true)
+        await loadFeed()
     }
 
     private func loadRepos() async {
@@ -157,12 +158,26 @@ struct HomeScreen: View {
         await loadState($calendar) { try await env.repository.contributionCalendar(login) }
     }
 
-    private func loadFeed(keepCurrent: Bool = false) async {
+    private func loadFeed() async {
         guard let login = env.viewerLogin else { return }
-        // Switching feeds must not show the other feed's events while loading.
-        if !keepCurrent { events = .loading }
         let feed = feed
-        await loadState($events) {
+        let operation = {
+            switch feed {
+            case .following: try await env.repository.receivedEvents(login)
+            case .myActivity: try await env.repository.userEvents(login)
+            }
+        }
+        await loadState($events, operation)
+    }
+
+    /// Switching feeds keeps the old events dimmed until the other feed arrives, then always replaces them.
+    private func switchFeed() async {
+        guard events.value != nil else { return await loadFeed() }
+        guard let login = env.viewerLogin else { return }
+        isSwitchingFeed = true
+        defer { isSwitchingFeed = false }
+        let feed = feed
+        await replaceState($events) {
             switch feed {
             case .following: try await env.repository.receivedEvents(login)
             case .myActivity: try await env.repository.userEvents(login)

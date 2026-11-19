@@ -201,8 +201,11 @@ struct StatLabel: View {
     let value: Int
 
     var body: some View {
-        Label(Formatting.compact(value), systemImage: systemImage)
-            .labelStyle(.titleAndIcon)
+        // Tighter than Label's default icon/title gap, which looks detached in caption-sized metadata rows.
+        HStack(spacing: 3) {
+            Image(systemName: systemImage)
+            Text(Formatting.compact(value))
+        }
     }
 }
 

@@ -6,6 +6,7 @@ struct IssuesPullsScreen: View {
     @State private var preset: IssueFilterPreset = .created
     @State private var stateFilter: IssueStateFilter = .open
     @State private var state: LoadState<[IssueOrPullSummary]> = .loading
+    @State private var isSwitching = false
 
     private struct Key: Hashable {
         var login: String?
@@ -15,7 +16,7 @@ struct IssuesPullsScreen: View {
 
     var body: some View {
         AsyncContent(state, emptyTitle: "No matching issues or pull requests", emptySystemImage: "checkmark.circle",
-                     retry: { await load() }) { items in
+                     retry: { await load() }, isRefreshing: isSwitching) { items in
             List(items) { item in
                 NavigationLink(value: Route.issue(item.ref)) { IssueRow(item: item) }
             }
@@ -41,17 +42,18 @@ struct IssuesPullsScreen: View {
         }
         .refreshable { await load() }
         .task(id: Key(login: env.viewerLogin, preset: preset, state: stateFilter)) {
-            state = .loading
-            await load()
+            guard state.value != nil else { return await load() }
+            isSwitching = true
+            defer { isSwitching = false }
+            await load(replacing: true)
         }
     }
 
-    private func load() async {
+    private func load(replacing: Bool = false) async {
         guard let login = env.viewerLogin else { return }
         let preset = preset, stateFilter = stateFilter
-        await loadState($state) {
-            try await env.repository.myIssuesAndPulls(preset: preset, viewerLogin: login, state: stateFilter)
-        }
+        let operation = { try await env.repository.myIssuesAndPulls(preset: preset, viewerLogin: login, state: stateFilter) }
+        if replacing { await replaceState($state, operation) } else { await loadState($state, operation) }
     }
 }
 
@@ -81,10 +83,11 @@ struct RepoIssuesScreen: View {
     @State private var stateFilter: IssueStateFilter = .open
     @State private var state: LoadState<[IssueOrPullSummary]> = .loading
     @State private var showsNewIssue = false
+    @State private var isSwitching = false
 
     var body: some View {
         AsyncContent(state, emptyTitle: pullRequests ? "No pull requests" : "No issues", emptySystemImage: "tray",
-                     retry: { await load() }) { items in
+                     retry: { await load() }, isRefreshing: isSwitching) { items in
             List(items) { item in
                 NavigationLink(value: Route.issue(item.ref)) { IssueRow(item: item, showsRepo: false) }
             }
@@ -108,14 +111,17 @@ struct RepoIssuesScreen: View {
         }
         .refreshable { await load() }
         .task(id: stateFilter) {
-            state = .loading
-            await load()
+            guard state.value != nil else { return await load() }
+            isSwitching = true
+            defer { isSwitching = false }
+            await load(replacing: true)
         }
     }
 
-    private func load() async {
+    private func load(replacing: Bool = false) async {
         let stateFilter = stateFilter
-        await loadState($state) { try await env.repository.repoIssuesOrPulls(repo, pullRequests: pullRequests, state: stateFilter) }
+        let operation = { try await env.repository.repoIssuesOrPulls(repo, pullRequests: pullRequests, state: stateFilter) }
+        if replacing { await replaceState($state, operation) } else { await loadState($state, operation) }
     }
 }
 

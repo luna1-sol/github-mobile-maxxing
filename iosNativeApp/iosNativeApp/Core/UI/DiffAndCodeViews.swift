@@ -131,7 +131,9 @@ struct CodeFileView: View {
         if wrapLines {
             ScrollView { rows }
         } else {
+            // A 2D scroll view centers content smaller than itself; code reads from the top-left corner.
             ScrollView([.vertical, .horizontal]) { rows }
+                .defaultScrollAnchor(.topLeading)
         }
     }
 }
@@ -149,24 +151,35 @@ struct DiffFileView: View {
                 .foregroundStyle(.secondary)
                 .padding()
         } else {
+            // Without wrapping, every line is padded to the longest one (the font is monospaced) so the
+            // added/removed background bands line up; infinite-width frames can't be used inside a 2D scroll view.
+            let width = wrapLines ? 0 : file.hunks.flatMap(\.lines).map(\.content.count)
+                .reduce(file.hunks.map(\.header.count).max() ?? 0, max)
             ScrollView(wrapLines ? .vertical : [.vertical, .horizontal]) {
                 LazyVStack(alignment: .leading, spacing: 0) {
                     ForEach(Array(file.hunks.enumerated()), id: \.offset) { _, hunk in
-                        Text(hunk.header)
+                        Text(wrapLines ? hunk.header : Self.padded(hunk.header, to: width + 16))
                             .font(.system(size: fontSize, design: .monospaced))
                             .foregroundStyle(.secondary)
                             .padding(.horizontal, 8)
                             .padding(.vertical, 4)
-                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .frame(maxWidth: wrapLines ? .infinity : nil, alignment: .leading)
                             .background(Color.accentColor.opacity(0.08))
                         ForEach(Array(hunk.lines.enumerated()), id: \.offset) { _, line in
-                            DiffLineRow(line: line, wrapLines: wrapLines, fontSize: fontSize)
+                            DiffLineRow(line: line, wrapLines: wrapLines, fontSize: fontSize, padTo: width)
                         }
                     }
                 }
                 .textSelection(.enabled)
             }
+            .defaultScrollAnchor(.topLeading)
         }
+    }
+}
+
+extension DiffFileView {
+    static func padded(_ text: String, to width: Int) -> String {
+        text.count >= width ? text : text + String(repeating: " ", count: width - text.count)
     }
 }
 
@@ -174,13 +187,14 @@ private struct DiffLineRow: View {
     let line: DiffLine
     let wrapLines: Bool
     let fontSize: CGFloat
+    var padTo = 0
 
     var body: some View {
         HStack(alignment: .top, spacing: 6) {
             Text(line.oldLineNumber.map(String.init) ?? "").frame(width: fontSize * 3, alignment: .trailing)
             Text(line.newLineNumber.map(String.init) ?? "").frame(width: fontSize * 3, alignment: .trailing)
             Text(prefix).frame(width: fontSize * 0.8)
-            Text(line.content.isEmpty ? " " : line.content)
+            Text(wrapLines ? (line.content.isEmpty ? " " : line.content) : DiffFileView.padded(line.content, to: max(padTo, 1)))
                 .fixedSize(horizontal: !wrapLines, vertical: true)
                 .frame(maxWidth: wrapLines ? .infinity : nil, alignment: .leading)
         }
@@ -188,7 +202,7 @@ private struct DiffLineRow: View {
         .foregroundStyle(line.kind == .meta ? Color.secondary : Color.primary)
         .padding(.vertical, 1)
         .padding(.trailing, 8)
-        .frame(maxWidth: .infinity, alignment: .leading)
+        .frame(maxWidth: wrapLines ? .infinity : nil, alignment: .leading)
         .background(background)
     }
 

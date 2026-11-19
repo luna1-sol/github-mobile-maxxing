@@ -85,11 +85,11 @@ extension GitHubRepository {
             let refType = payload?["ref_type"]?.string ?? "ref"
             let ref = payload?["ref"]?.string
             event.branchName = refType == "branch" ? ref : nil
-            event.summaryText = ref.map { String(localized: "created \(refType) \($0)") } ?? String(localized: "created repository")
+            event.summaryText = ref.map { String(localized: "created \(refTypeName(refType)) \($0)") } ?? String(localized: "created repository")
         case "DeleteEvent":
             event.kind = .delete
             let refType = payload?["ref_type"]?.string ?? "ref"
-            event.summaryText = String(localized: "deleted \(refType) \(payload?["ref"]?.string ?? "")")
+            event.summaryText = String(localized: "deleted \(refTypeName(refType)) \(payload?["ref"]?.string ?? "")")
         case "ReleaseEvent":
             event.kind = .release
             let tag = payload?["release"]?["tag_name"]?.string
@@ -107,6 +107,15 @@ extension GitHubRepository {
             event.summaryText = type.hasSuffix("Event") ? String(type.dropLast(5)) : (type.isEmpty ? "activity" : type)
         }
         return event
+    }
+
+    private static func refTypeName(_ refType: String) -> String {
+        switch refType {
+        case "branch": String(localized: "branch")
+        case "tag": String(localized: "tag")
+        case "repository": String(localized: "repository")
+        default: refType
+        }
     }
 
     private static func numberSuffix(_ number: Int?) -> String {

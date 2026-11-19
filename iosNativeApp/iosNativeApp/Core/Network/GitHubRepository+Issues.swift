@@ -215,6 +215,12 @@ extension GitHubRepository {
             }
         }
 
+        // GitHub records a ClosedEvent alongside every MergedEvent; the web UI shows only the merge, so do the same.
+        let isMerged = timeline.contains { if case .stateChange(let c) = $0, case .merged = c.action { return true } else { return false } }
+        let visibleTimeline = isMerged
+            ? timeline.filter { if case .stateChange(let c) = $0, c.action == .closed { return false } else { return true } }
+            : timeline
+
         let milestone: MilestoneSummary? = item["milestone"].flatMap { m in
             guard let number = m["number"]?.int, let title = m["title"]?.string else { return nil }
             return MilestoneSummary(number: number, title: title, description: m["description"]?.string,
@@ -251,7 +257,7 @@ extension GitHubRepository {
             reviewDecision: item["reviewDecision"]?.string,
             checkRollup: Self.checkRollupState(item),
             htmlURL: item["url"]?.string ?? "",
-            timeline: timeline,
+            timeline: visibleTimeline,
             viewerPermission: permission,
             viewerCanUpdate: canUpdate,
             viewerCanCloseOrReopen: canUpdate || canTriage,

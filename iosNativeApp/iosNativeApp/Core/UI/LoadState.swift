@@ -36,6 +36,23 @@ func loadState<Value>(_ state: Binding<LoadState<Value>>, _ operation: () async 
     }
 }
 
+/// Like `loadState`, but for switching what is shown (a filter or tab changed): the previous content stays
+/// on screen until the new result arrives and is then always replaced, by the new value or by the error.
+/// Keeping the list mounted also keeps the navigation bar's large title attached to it.
+func replaceState<Value>(_ state: Binding<LoadState<Value>>, _ operation: () async throws -> Value) async {
+    do {
+        let result = try await operation()
+        try Task.checkCancellation()
+        state.wrappedValue = .loaded(result)
+    } catch is CancellationError {
+        return
+    } catch let error as URLError where error.code == .cancelled {
+        return
+    } catch {
+        state.wrappedValue = .failed(error.localizedDescription)
+    }
+}
+
 /// Renders loading / error / empty / content for a `LoadState`.
 struct AsyncContent<Value, Content: View>: View {
     let state: LoadState<Value>
@@ -43,6 +60,8 @@ struct AsyncContent<Value, Content: View>: View {
     var emptyTitle: LocalizedStringKey = "Nothing here"
     var emptySystemImage = "tray"
     var retry: (() async -> Void)?
+    /// Dims the current content and shows a spinner while a replacement is loading.
+    var isRefreshing = false
     @ViewBuilder var content: (Value) -> Content
 
     var body: some View {
@@ -63,11 +82,19 @@ struct AsyncContent<Value, Content: View>: View {
                 }
             }
         case .loaded(let value):
-            if isEmpty(value) {
-                ContentUnavailableView(emptyTitle, systemImage: emptySystemImage)
-            } else {
-                content(value)
+            Group {
+                if isEmpty(value) {
+                    ContentUnavailableView(emptyTitle, systemImage: emptySystemImage)
+                } else {
+                    content(value)
+                }
             }
+            .opacity(isRefreshing ? 0.4 : 1)
+            .allowsHitTesting(!isRefreshing)
+            .overlay {
+                if isRefreshing { ProgressView().controlSize(.large) }
+            }
+            .animation(.easeInOut(duration: 0.15), value: isRefreshing)
         }
     }
 }
@@ -79,9 +106,11 @@ extension AsyncContent {
         emptyTitle: LocalizedStringKey = "Nothing here",
         emptySystemImage: String = "tray",
         retry: (() async -> Void)? = nil,
+        isRefreshing: Bool = false,
         @ViewBuilder content: @escaping (Value) -> Content
     ) {
         self.state = state
+        self.isRefreshing = isRefreshing
         self.isEmpty = isEmpty
         self.emptyTitle = emptyTitle
         self.emptySystemImage = emptySystemImage
@@ -94,9 +123,11 @@ extension AsyncContent {
         emptyTitle: LocalizedStringKey = "Nothing here",
         emptySystemImage: String = "tray",
         retry: (() async -> Void)? = nil,
+        isRefreshing: Bool = false,
         @ViewBuilder content: @escaping (Value) -> Content
     ) where Value: Collection {
         self.state = state
+        self.isRefreshing = isRefreshing
         self.isEmpty = { $0.isEmpty }
         self.emptyTitle = emptyTitle
         self.emptySystemImage = emptySystemImage

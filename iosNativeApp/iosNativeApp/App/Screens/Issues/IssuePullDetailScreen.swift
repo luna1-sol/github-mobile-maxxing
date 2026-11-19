@@ -44,6 +44,7 @@ struct IssuePullDetailScreen: View {
             if let detail = state.value { bottomBar(detail) }
         }
         .navigationTitle("#\(String(ref.number))")
+        .toolbarVisibility(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar { toolbarContent }
         .task(id: ref) { await load() }
@@ -779,6 +780,7 @@ struct PullFilesScreen: View {
             .listStyle(.plain)
         }
         .navigationTitle("Files changed")
+        .toolbarVisibility(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             ToolbarItem(placement: .topBarTrailing) {

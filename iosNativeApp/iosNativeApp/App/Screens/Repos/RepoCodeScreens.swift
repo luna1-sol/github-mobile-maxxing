@@ -109,6 +109,7 @@ struct FileScreen: View {
             }
         }
         .navigationTitle((path as NSString).lastPathComponent)
+        .toolbarVisibility(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             if !isImage {
@@ -250,6 +251,7 @@ struct CommitDetailScreen: View {
             }
         }
         .navigationTitle(String(sha.prefix(7)))
+        .toolbarVisibility(.hidden, for: .tabBar)
         .navigationBarTitleDisplayMode(.inline)
         .toolbar {
             if let url = state.value.flatMap({ URL(string: $0.htmlURL) }) {

@@ -5,11 +5,12 @@ struct InboxScreen: View {
     @Environment(AppEnvironment.self) private var env
     @State private var state: LoadState<[NotificationThread]> = .loading
     @State private var error: String?
+    @State private var isSwitching = false
 
     var body: some View {
         let filter = env.preferences.inboxFilter
         AsyncContent(state, emptyTitle: filter == .unread ? "Inbox zero" : "No notifications",
-                     emptySystemImage: "tray", retry: { await load() }) { threads in
+                     emptySystemImage: "tray", retry: { await load() }, isRefreshing: isSwitching) { threads in
             List {
                 ForEach(threads) { thread in
                     Button { open(thread) } label: { NotificationRow(thread: thread) }
@@ -63,15 +64,18 @@ struct InboxScreen: View {
         }
         .refreshable { await load() }
         .task(id: filter) {
-            state = .loading
-            await load()
+            guard state.value != nil else { return await load() }
+            isSwitching = true
+            defer { isSwitching = false }
+            await load(replacing: true)
         }
         .errorAlert($error)
     }
 
-    private func load() async {
+    private func load(replacing: Bool = false) async {
         let filter = env.preferences.inboxFilter
-        await loadState($state) { try await env.repository.notifications(filter: filter) }
+        let operation = { try await env.repository.notifications(filter: filter) }
+        if replacing { await replaceState($state, operation) } else { await loadState($state, operation) }
         if filter == .unread, let threads = state.value { env.unreadCount = threads.filter(\.unread).count }
     }
 
