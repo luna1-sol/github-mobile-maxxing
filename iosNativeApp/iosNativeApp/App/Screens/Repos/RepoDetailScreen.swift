@@ -125,6 +125,7 @@ struct RepoDetailScreen: View {
                     Task { await toggleStar(summary) }
                 } label: {
                     Label(summary.viewerHasStarred ? "Starred" : "Star", systemImage: summary.viewerHasStarred ? "star.fill" : "star")
+                        .onAccentLabel(summary.viewerHasStarred)
                 }
                 .buttonStyle(summary.viewerHasStarred ? AnyPrimitiveButtonStyle(.glassProminent) : AnyPrimitiveButtonStyle(.glass))
                 .glassEffectID("star", in: glassNamespace)

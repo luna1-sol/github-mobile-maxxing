@@ -19,6 +19,17 @@ extension Color {
         let r = Double((value >> 16) & 0xFF), g = Double((value >> 8) & 0xFF), b = Double(value & 0xFF)
         return (0.299 * r + 0.587 * g + 0.114 * b) / 255 > 0.6
     }
+
+    /// Content colour on an accent fill (Material 3 "onPrimary"): white on the light-mode purple, dark purple on the
+    /// light lavender dark-mode accent, where the system's white label of `.glassProminent` is hard to read.
+    static let onAccent = Color("OnAccentColor")
+}
+
+extension View {
+    /// Label colour for an accent-filled `.glassProminent` button; pass `false` when the button is currently `.glass`.
+    func onAccentLabel(_ prominent: Bool = true) -> some View {
+        foregroundStyle(prominent ? AnyShapeStyle(Color.onAccent) : AnyShapeStyle(.primary))
+    }
 }
 
 /// GitHub-style semantic colours for states.

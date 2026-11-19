@@ -79,6 +79,7 @@ struct AsyncContent<Value, Content: View>: View {
                 if let retry {
                     Button("Retry") { Task { await retry() } }
                         .buttonStyle(.glassProminent)
+                        .onAccentLabel()
                 }
             }
         case .loaded(let value):

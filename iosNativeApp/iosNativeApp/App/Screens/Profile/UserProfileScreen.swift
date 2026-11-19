@@ -101,6 +101,7 @@ struct UserProfileScreen: View {
                                 ProgressView()
                             } else {
                                 Text(user.viewerIsFollowing ? "Unfollow" : "Follow")
+                                    .onAccentLabel(!user.viewerIsFollowing)
                             }
                         }
                         .buttonStyle(user.viewerIsFollowing ? AnyPrimitiveButtonStyle(.glass) : AnyPrimitiveButtonStyle(.glassProminent))

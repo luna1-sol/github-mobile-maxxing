@@ -159,6 +159,7 @@ struct SignInScreen: View {
                     .font(.headline)
                     .frame(maxWidth: .infinity)
                     .padding(.vertical, 6)
+                    .onAccentLabel()
             }
             .buttonStyle(.glassProminent)
             .controlSize(.large)
@@ -204,6 +205,7 @@ struct SignInScreen: View {
                     if let url = URL(string: code.verificationURI) { openURL(url) }
                 } label: {
                     Label("Open GitHub", systemImage: "safari")
+                        .onAccentLabel()
                 }
                 .buttonStyle(.glassProminent)
             }

@@ -628,6 +628,7 @@ private struct CommentComposer: View {
                     if isPosting { ProgressView() } else { Image(systemName: "arrow.up") }
                 }
                 .frame(width: 32, height: 32)
+                .onAccentLabel()
             }
             .buttonStyle(.glassProminent)
             .buttonBorderShape(.circle)

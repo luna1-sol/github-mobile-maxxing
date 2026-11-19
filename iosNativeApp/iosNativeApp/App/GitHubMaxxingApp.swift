@@ -39,6 +39,7 @@ struct RootView: View {
                 } actions: {
                     Button("Try again") { Task { await env.sessionManager.load() } }
                         .buttonStyle(.glassProminent)
+                        .onAccentLabel()
                 }
             } else if env.sessionManager.isSignedIn {
                 MainTabView()

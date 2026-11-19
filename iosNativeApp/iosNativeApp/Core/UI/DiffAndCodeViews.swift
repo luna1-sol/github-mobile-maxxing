@@ -156,16 +156,20 @@ struct DiffFileView: View {
             let width = wrapLines ? 0 : file.hunks.flatMap(\.lines).map(\.content.count)
                 .reduce(file.hunks.map(\.header.count).max() ?? 0, max)
             ScrollView(wrapLines ? .vertical : [.vertical, .horizontal]) {
+                // One flat list with unique ids: nested ForEach(id: \.offset) gave every hunk's lines the same ids,
+                // and LazyVStack then skipped the rows of later hunks, leaving blank gaps.
                 LazyVStack(alignment: .leading, spacing: 0) {
-                    ForEach(Array(file.hunks.enumerated()), id: \.offset) { _, hunk in
-                        Text(wrapLines ? hunk.header : Self.padded(hunk.header, to: width + 16))
-                            .font(.system(size: fontSize, design: .monospaced))
-                            .foregroundStyle(.secondary)
-                            .padding(.horizontal, 8)
-                            .padding(.vertical, 4)
-                            .frame(maxWidth: wrapLines ? .infinity : nil, alignment: .leading)
-                            .background(Color.accentColor.opacity(0.08))
-                        ForEach(Array(hunk.lines.enumerated()), id: \.offset) { _, line in
+                    ForEach(Self.rows(file.hunks)) { row in
+                        switch row.content {
+                        case .header(let header):
+                            Text(wrapLines ? header : Self.padded(header, to: width + 16))
+                                .font(.system(size: fontSize, design: .monospaced))
+                                .foregroundStyle(.secondary)
+                                .padding(.horizontal, 8)
+                                .padding(.vertical, 4)
+                                .frame(maxWidth: wrapLines ? .infinity : nil, alignment: .leading)
+                                .background(Color.accentColor.opacity(0.08))
+                        case .line(let line):
                             DiffLineRow(line: line, wrapLines: wrapLines, fontSize: fontSize, padTo: width)
                         }
                     }
@@ -178,6 +182,28 @@ struct DiffFileView: View {
 }
 
 extension DiffFileView {
+    struct Row: Identifiable {
+        enum Content {
+            case header(String)
+            case line(DiffLine)
+        }
+
+        let id: Int
+        let content: Content
+    }
+
+    /// Hunk headers and lines in display order, numbered so each row has its own identity.
+    static func rows(_ hunks: [DiffHunk]) -> [Row] {
+        var rows: [Row] = []
+        for hunk in hunks {
+            rows.append(Row(id: rows.count, content: .header(hunk.header)))
+            for line in hunk.lines {
+                rows.append(Row(id: rows.count, content: .line(line)))
+            }
+        }
+        return rows
+    }
+
     static func padded(_ text: String, to width: Int) -> String {
         text.count >= width ? text : text + String(repeating: " ", count: width - text.count)
     }
