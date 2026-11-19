@@ -182,7 +182,7 @@ struct CommitsScreen: View {
                             Text(commit.headline).font(.subheadline.weight(.medium)).lineLimit(2)
                             HStack(spacing: 8) {
                                 Text(commit.authorLogin ?? commit.authorName)
-                                Text(Formatting.relative(commit.committedAt))
+                                RelativeTimeText(commit.committedAt)
                                 Text(commit.shortSHA).monospaced()
                                 if commit.isVerified { Image(systemName: "checkmark.seal.fill").foregroundStyle(StateColors.open) }
                             }
@@ -225,7 +225,7 @@ struct CommitDetailScreen: View {
                         HStack(spacing: 8) {
                             AvatarView(url: detail.summary.authorAvatarURL, size: 20)
                             Text(detail.summary.authorLogin ?? detail.summary.authorName).bold()
-                            Text(Formatting.relative(detail.summary.committedAt)).foregroundStyle(.secondary)
+                            RelativeTimeText(detail.summary.committedAt).foregroundStyle(.secondary)
                         }
                         .font(.footnote)
                         HStack(spacing: 12) {

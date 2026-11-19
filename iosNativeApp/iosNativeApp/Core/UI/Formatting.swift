@@ -1,4 +1,5 @@
 import Foundation
+import SwiftUI
 
 enum Formatting {
     nonisolated(unsafe) private static let isoFractional: ISO8601DateFormatter = {
@@ -36,5 +37,21 @@ enum Formatting {
 
     static func bytes(_ value: Int64) -> String {
         ByteCountFormatter.string(fromByteCount: value, countStyle: .file)
+    }
+}
+
+/// Relative timestamp ("3 min. ago") that stays current. A plain `Text(Formatting.relative(...))` freezes at its first
+/// render: after a reload SwiftUI skips rows whose inputs did not change, so a just-created event kept saying "2 sec. ago".
+struct RelativeTimeText: View {
+    let iso8601: String
+
+    init(_ iso8601: String) {
+        self.iso8601 = iso8601
+    }
+
+    var body: some View {
+        TimelineView(.everyMinute) { _ in
+            Text(Formatting.relative(iso8601))
+        }
     }
 }

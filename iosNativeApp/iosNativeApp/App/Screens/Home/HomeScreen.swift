@@ -289,7 +289,7 @@ struct ActivityRow: View {
                     }
                 }
                 .buttonStyle(.plain)
-                Text(Formatting.relative(event.createdAt)).font(.caption).foregroundStyle(.tertiary)
+                RelativeTimeText(event.createdAt).font(.caption).foregroundStyle(.tertiary)
             }
             Spacer(minLength: 0)
             Image(systemName: symbol).foregroundStyle(.secondary)

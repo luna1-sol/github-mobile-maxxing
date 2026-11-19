@@ -198,11 +198,14 @@ extension TimelineEvent {
 extension IssueOrPullDetail {
     init(_ k: MaxxingShared.IssueOrPullDetail) {
         let timeline = k.timeline.compactMap(TimelineEvent.init)
-        // GitHub records a ClosedEvent alongside every MergedEvent; the web UI shows only the merge, so do the same.
-        let isMerged = timeline.contains { if case .stateChange(let c) = $0, case .merged = c.action { true } else { false } }
-        let visibleTimeline = isMerged
-            ? timeline.filter { if case .stateChange(let c) = $0, c.action == .closed { false } else { true } }
-            : timeline
+        // GitHub records a ClosedEvent alongside every MergedEvent (same timestamp); the web UI shows only the merge.
+        // Earlier manual close/reopen pairs stay visible.
+        let mergeTimes = Set(timeline.compactMap { event -> String? in
+            if case .stateChange(let c) = event, case .merged = c.action { c.createdAt } else { nil }
+        })
+        let visibleTimeline = timeline.filter { event in
+            if case .stateChange(let c) = event, c.action == .closed, mergeTimes.contains(c.createdAt) { false } else { true }
+        }
         self.init(
             id: k.id, number: Int(k.number), title: k.title, body: k.body, kind: IssueOrPullKind(k.kind),
             state: IssueOrPullState(k.state), isDraft: k.isDraft, repoOwner: k.repoOwner, repoName: k.repoName,

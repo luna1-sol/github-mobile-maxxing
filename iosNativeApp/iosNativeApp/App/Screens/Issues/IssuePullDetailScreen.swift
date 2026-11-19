@@ -67,9 +67,12 @@ struct IssuePullDetailScreen: View {
         .sheet(item: $editingComment) { comment in
             EditCommentSheet(ref: ref, comment: comment) { await load(force: true) }
         }
-        .confirmationDialog("Delete this comment?", isPresented: Binding(get: { deletingComment != nil }, set: { if !$0 { deletingComment = nil } }),
-                            titleVisibility: .visible, presenting: deletingComment) { comment in
+        // An alert rather than a confirmation dialog: on iOS 26 the dialog becomes a popover whose arrow points at
+        // whatever view it is attached to, not at the comment being deleted.
+        .alert("Delete this comment?", isPresented: Binding(get: { deletingComment != nil }, set: { if !$0 { deletingComment = nil } }),
+               presenting: deletingComment) { comment in
             Button("Delete", role: .destructive) { Task { await deleteComment(comment) } }
+            Button("Cancel", role: .cancel) {}
         } message: { _ in
             Text("This can't be undone.")
         }
@@ -277,7 +280,7 @@ private struct DetailHeader: View {
                     }
                 }
                 .buttonStyle(.plain)
-                Text(Formatting.relative(detail.createdAt)).foregroundStyle(.secondary)
+                RelativeTimeText(detail.createdAt).foregroundStyle(.secondary)
             }
             .font(.subheadline)
         }
@@ -483,7 +486,7 @@ private struct EventLine: View {
             }
             Text(text).foregroundStyle(.secondary)
             Spacer(minLength: 0)
-            Text(Formatting.relative(createdAt)).foregroundStyle(.tertiary)
+            RelativeTimeText(createdAt).foregroundStyle(.tertiary)
         }
         .font(.footnote)
         .padding(.horizontal, 4)
@@ -516,7 +519,7 @@ private struct CommentCard<MenuContent: View>: View {
                         .padding(.vertical, 2)
                         .overlay(Capsule().stroke(.separator))
                 }
-                Text(Formatting.relative(createdAt)).font(.caption).foregroundStyle(.secondary)
+                RelativeTimeText(createdAt).font(.caption).foregroundStyle(.secondary)
                 Spacer()
                 Menu { menu() } label: {
                     Image(systemName: "ellipsis").frame(width: 28, height: 28)
@@ -616,7 +619,11 @@ private struct CommentComposer: View {
                 .lineLimit(1...5)
                 .focused($focused)
                 .padding(.vertical, 6)
-            Button(action: onSend) {
+            Button {
+                // Close the keyboard: on a short thread there is nothing to scroll to dismiss it.
+                focused = false
+                onSend()
+            } label: {
                 Group {
                     if isPosting { ProgressView() } else { Image(systemName: "arrow.up") }
                 }

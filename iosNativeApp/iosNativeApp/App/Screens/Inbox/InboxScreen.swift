@@ -154,7 +154,7 @@ private struct NotificationRow: View {
                         .foregroundStyle(.secondary)
                         .lineLimit(1)
                     Spacer()
-                    Text(Formatting.relative(thread.updatedAt)).font(.caption).foregroundStyle(.tertiary)
+                    RelativeTimeText(thread.updatedAt).font(.caption).foregroundStyle(.tertiary)
                 }
                 Text(thread.subjectTitle)
                     .font(.body.weight(thread.unread ? .semibold : .regular))

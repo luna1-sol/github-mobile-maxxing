@@ -43,6 +43,8 @@ struct LabelChip: View {
             .padding(.vertical, 3)
             .foregroundStyle(Color.prefersDarkText(onHex: label.colorHex) ? Color.black : Color.white)
             .background(Color(hex: label.colorHex), in: .capsule)
+            // Very light labels (e.g. GitHub's white "wontfix") would vanish on light backgrounds without an outline.
+            .overlay(Capsule().strokeBorder(.separator, lineWidth: 0.5))
     }
 }
 
@@ -237,7 +239,7 @@ struct IssueRow: View {
                 }
                 HStack(spacing: 10) {
                     if !showsRepo { Text("#\(String(item.number))") }
-                    Text(Formatting.relative(item.updatedAt))
+                    RelativeTimeText(item.updatedAt)
                     if item.commentCount > 0 {
                         StatLabel(systemImage: "bubble.left", value: item.commentCount)
                     }
@@ -290,7 +292,7 @@ struct RepoRow: View {
                     if let language = repo.language { LanguageDot(name: language, colorHex: repo.languageColorHex) }
                     StatLabel(systemImage: "star", value: repo.stargazersCount)
                     if repo.forksCount > 0 { StatLabel(systemImage: "tuningfork", value: repo.forksCount) }
-                    if !repo.updatedAt.isEmpty { Text(Formatting.relative(repo.updatedAt)) }
+                    if !repo.updatedAt.isEmpty { RelativeTimeText(repo.updatedAt) }
                 }
                 .font(.caption)
                 .foregroundStyle(.secondary)
